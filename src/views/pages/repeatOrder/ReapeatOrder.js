@@ -21,6 +21,9 @@ import {
 } from "@coreui/react";
 
 import { data } from "./dummyData";
+import HeaderRo from "./HeaderRO";
+import ButtonOption from "./ButtonOption";
+import DataRequest from "./DataRequest";
 
 const fields = [
   "procode",
@@ -35,7 +38,7 @@ const fields = [
 const datalist = data;
 
 const RepeatOrder = () => {
-  const [activeKey, setActiveKey] = useState(1);
+  //const [activeKey, setActiveKey] = useState(1);
   const [modal, setModal] = useState(false);
 
   const [procodeDisabled, setProcodeDisabled] = useState(true);
@@ -70,174 +73,13 @@ const RepeatOrder = () => {
   return (
     <>
       {/* Request Header */}
-      <CContainer fluid>
-        <CCard>
-          <CCardBody>
-            <CRow>
-              <CCol xs={12} md={6} className="border-right border-1">
-                <div className="mb-3 border-bottom border-1 d-flex">
-                  <h2 className="mr-2">REPEAT ORDER</h2>
-                  <p className="align-self-end mb-2">v1.0.0</p>
-                </div>
-                <CRow className="mb-3">
-                  <CLabel htmlFor="outlet" className="col-sm-2 col-form-label">
-                    Outlet :
-                  </CLabel>
-                  <CCol sm={10}>
-                    <CInput
-                      type="text"
-                      id="outlet"
-                      size="sm"
-                      placeholder="outlet code - outlet name"
-                      disabled
-                    />
-                  </CCol>
-                </CRow>
-                <CRow className="mb-3">
-                  <CLabel
-                    htmlFor="login-info"
-                    className="col-sm-2 col-form-label"
-                  >
-                    Login Info :
-                  </CLabel>
-                  <CCol sm={10}>
-                    <CInput
-                      type="text"
-                      id="login-info"
-                      size="sm"
-                      placeholder="user login - login date"
-                      disabled
-                    />
-                  </CCol>
-                </CRow>
-              </CCol>
+      <HeaderRo />
 
-              <CCol xs={12} md={6}>
-                <CLabel htmlFor="order-numb">Order No :</CLabel>
-                <CRow>
-                  <CCol xs={10} md={10}>
-                    <CInput type="text" id="order-numb" size="" />
-                  </CCol>
-                  <CButton color="light" size="" onClick={toggle}>
-                    ...
-                  </CButton>
-                </CRow>
-
-                <CRow className="mt-3">
-                  <CCol xs={12} md={4}>
-                    <CLabel htmlFor="order-status">Order Status :</CLabel>
-                    <CInput
-                      type="text"
-                      id="order-status"
-                      size="sm"
-                      placeholder="un / confirmed"
-                      disabled
-                    />
-                  </CCol>
-                  <CCol xs={12} md={4}>
-                    <CLabel htmlFor="confirm-date">Confirm Date :</CLabel>
-                    <CInput
-                      type="text"
-                      id="confirm-date"
-                      size="sm"
-                      placeholder="dd MMM yyyy"
-                      disabled
-                    />
-                  </CCol>
-                  <CCol xs={12} md={4}>
-                    <CLabel htmlFor="confirm-by">Confirm By :</CLabel>
-                    <CInput
-                      type="text"
-                      id="confirm-by"
-                      size="sm"
-                      placeholder="user ID - user name"
-                      disabled
-                    />
-                  </CCol>
-                </CRow>
-              </CCol>
-            </CRow>
-          </CCardBody>
-        </CCard>
-      </CContainer>
-
-      {/* Request option */}
-      <CContainer fluid className="mb-2">
-        <CRow className="justify-content-between">
-          <CCol sm={4}>
-            <h4>label status process...</h4>
-          </CCol>
-          <CCol sm={4} className="d-flex justify-content-end">
-            <CButton color="dark" className="mr-2">
-              New Request
-            </CButton>
-            <CButton color="dark" className="mr-2">
-              Confirm
-            </CButton>
-            <CButton color="dark">Print</CButton>
-          </CCol>
-        </CRow>
-      </CContainer>
-
-      {/* Data request */}
-      <CContainer fluid>
-        <CCard>
-          <CCardBody>
-            <CTabs>
-              <CNav variant="tabs" role="tablist">
-                <CNavItem>
-                  <CNavLink
-                    active={activeKey === 1}
-                    onClick={() => setActiveKey(1)}
-                  >
-                    All
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink
-                    active={activeKey === 2}
-                    onClick={() => setActiveKey(2)}
-                  >
-                    Local
-                  </CNavLink>
-                </CNavItem>
-              </CNav>
-              <CTabContent>
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="home-tab"
-                  visible={activeKey === 1}
-                >
-                  <CDataTable
-                    items={datalist}
-                    fields={fields}
-                    tableFilter
-                    itemsPerPage={5}
-                    itemsPerPageSelect
-                    pagination
-                    hover
-                    clickableRows
-                    onRowClick={(e) => getRowData(e)}
-                  />
-                </CTabPane>
-
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="profile-tab"
-                  visible={activeKey === 2}
-                >
-                  <CDataTable
-                    items={datalist}
-                    fields={fields}
-                    itemsPerPage={5}
-                    pagination
-                  />
-                </CTabPane>
-              </CTabContent>
-            </CTabs>
-          </CCardBody>
-        </CCard>
-      </CContainer>
+      {/* Request Option */}
+      <ButtonOption />
+   
+      {/* Data Request */}
+      <DataRequest />
 
       {/* Form Request */}
       <CContainer fluid>
@@ -391,23 +233,6 @@ const RepeatOrder = () => {
           </CCardBody>
         </CCard>
       </CContainer>
-
-      <CModal show={modal} onClose={toggle} size="xl">
-        <CModalHeader closeButton>List Order Number</CModalHeader>
-        <CModalBody>
-          <CDataTable
-            items={datalist}
-            fields={fields}
-            tableFilter
-            itemsPerPage={5}
-            itemsPerPageSelect
-            pagination
-            hover
-            clickableRows
-            onRowClick={(e) => getRowData(e)}
-          />
-        </CModalBody>
-      </CModal>
     </>
   );
 };
