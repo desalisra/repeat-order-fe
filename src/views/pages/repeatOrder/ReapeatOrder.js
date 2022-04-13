@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   CButton,
   CCard,
@@ -14,7 +14,6 @@ import {
   CNavItem,
   CNavLink,
   CRow,
-  CSpinner,
   CTabs,
   CTabContent,
   CTabPane,

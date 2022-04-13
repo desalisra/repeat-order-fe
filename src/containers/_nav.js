@@ -1,10 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUsers,
   faColumns,
-  faWindowMaximize,
-  faUsersCog,
   faListAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
