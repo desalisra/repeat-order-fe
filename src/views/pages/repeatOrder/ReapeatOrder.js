@@ -7,56 +7,20 @@ import {
   CContainer,
   CInput,
   CLabel,
-  CModal,
-  CModalBody,
-  CModalHeader,
-  CNav,
-  CNavItem,
-  CNavLink,
   CRow,
-  CTabs,
-  CTabContent,
-  CTabPane,
-  CDataTable,
 } from "@coreui/react";
 
-import { data } from "./dummyData";
 import HeaderRo from "./HeaderRO";
 import ButtonOption from "./ButtonOption";
 import DataRequest from "./DataRequest";
 
-const fields = [
-  "procode",
-  "Product Description",
-  "Quantity",
-  "Order Unit",
-  "Order Qty",
-  "Order Limit",
-  "Remain",
-  "Net Price",
-];
-const datalist = data;
-
 const RepeatOrder = () => {
-  //const [activeKey, setActiveKey] = useState(1);
-  const [modal, setModal] = useState(false);
 
   const [procodeDisabled, setProcodeDisabled] = useState(true);
   const [procodeText, setProcodeText] = useState("");
   const [orderQtyDisabled, setOrderQtyDisabled] = useState(true);
   const [orderQtyText, setOrderQtyText] = useState("");
   const [btnEnabled, setbtnEnabled] = useState(false);
-
-  const toggle = () => {
-    setModal(!modal);
-  };
-
-  const getRowData = (e) => {
-    console.log(procodeDisabled);
-    if (procodeDisabled) {
-      setProcodeText(e.procode);
-    }
-  };
 
   const btnAddClick = () => {
     setbtnEnabled(!btnEnabled);

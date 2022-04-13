@@ -7,15 +7,20 @@ import {
   CHeaderNavItem,
   CHeaderNavLink,
   CBreadcrumbRouter,
+  CDropdown,
+  CDropdownToggle,
+  CDropdownMenu,
+  CDropdownItem,
+  CLabel,
 } from "@coreui/react";
 
 import { TheHeaderDropdown } from "./index";
-
+import CIcon from "@coreui/icons-react";
 import routes from "../routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
-const TheHeader = () => {
+const TheHeader = (props) => {
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.darkMode);
   const sidebarShow = useSelector((state) => state.sidebarShow);
@@ -87,8 +92,33 @@ const TheHeader = () => {
             <FontAwesomeIcon icon={faMoon} className="c-d-dark-none" />
             <FontAwesomeIcon icon={faSun} className="c-d-default-none" />
           </CToggler>
+          <CDropdown>
+            <CDropdownToggle color="danger" variant="outline">
+              <CIcon name={props.currFlag} /> {props.currLanguage}
+            </CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem
+                hidden={props.currLanguage === "ID"}
+                onClick={(e) => props.languageChange("cif-Id", "ID")}
+              >
+                <CLabel>
+                  <CIcon name="cif-Id" /> INDONESIA
+                </CLabel>
+              </CDropdownItem>
+              <CDropdownItem
+                hidden={props.currLanguage === "EN"}
+                onClick={(e) => props.languageChange("cif-Us", "EN")}
+              >
+                <CLabel>
+                  <CIcon name="cif-Us" /> ENGLISH (US)
+                </CLabel>
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
           <TheHeaderDropdown />
         </CHeaderNav>
+
+
       </CHeader>
     </>
   );

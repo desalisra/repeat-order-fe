@@ -13,9 +13,11 @@ import {
     CModalBody,
 } from "@coreui/react";
 import DataRequest from "./DataRequest";
+import LanguageContext from "containers/languageContext";
 
 
 const HeaderRo = () => {
+    let language = React.useContext(LanguageContext);
     const [modal, setModal] = useState(false);
 
     const Toggle = () => {
@@ -36,7 +38,7 @@ const HeaderRo = () => {
 
                         <CRow className="mb-3">
                             <CLabel htmlFor="outlet" className="col-sm-3 col-form-label">
-                                Outlet:
+                                {language.pageContent[language.pageLanguage].RO.outlet}
                             </CLabel>
                             <CCol sm={9}>
                                 <CInput
