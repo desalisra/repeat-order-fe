@@ -31,19 +31,6 @@ const _nav = [
       />
     ),
   },
-
-  {
-    _tag: "CSidebarNavItem",
-    name: "Coba Data",
-    to: "/reqdata",
-    icon: (
-      <FontAwesomeIcon
-        icon={faListAlt}
-        size={"lg"}
-        className="c-sidebar-nav-icon"
-      />
-    ),
-  },
 ];
 
 export default _nav;

@@ -67,7 +67,9 @@ const HeaderRo = () => {
                     </CCol>
 
                     <CCol>
-                        <CLabel htmlFor="order-numb">Order No</CLabel>
+                        <CLabel htmlFor="order-numb">
+                            {language.pageContent[language.pageLanguage].RO.noorder}
+                        </CLabel>
                         <CRow>
                             <CCol xs={10} md={10}>
                                 <CInput type="text" id="order-numb" size="" />
@@ -78,7 +80,9 @@ const HeaderRo = () => {
                         </CRow>
                         <CRow className="mt-3">
                             <CCol xs={12} md={4}>
-                                <CLabel htmlFor="order-status">Order Status :</CLabel>
+                                <CLabel htmlFor="order-status">
+                                    {language.pageContent[language.pageLanguage].RO.status}
+                                </CLabel>
                                 <CInput
                                     type="text"
                                     id="order-status"
@@ -88,7 +92,9 @@ const HeaderRo = () => {
                                 />
                             </CCol>
                             <CCol xs={12} md={4}>
-                                <CLabel htmlFor="confirm-date">Confirm Date :</CLabel>
+                                <CLabel htmlFor="confirm-date">
+                                    {language.pageContent[language.pageLanguage].RO.tglconfirm}
+                                </CLabel>
                                 <CInput
                                     type="text"
                                     id="confirm-date"
@@ -98,7 +104,9 @@ const HeaderRo = () => {
                                 />
                             </CCol>
                             <CCol xs={12} md={4}>
-                                <CLabel htmlFor="confirm-by">Confirm By :</CLabel>
+                                <CLabel htmlFor="confirm-by">
+                                    {language.pageContent[language.pageLanguage].RO.confirm}
+                                </CLabel>
                                 <CInput
                                     type="text"
                                     id="confirm-by"

@@ -20,8 +20,8 @@ const TheLayout = () => {
     darkMode && "c-dark-theme"
   );
 
-  const [currLanguage, setCurrLanguage] = useState("");
-  const [currFlag, setCurrFlag] = useState("");
+  const [currLanguage, setCurrLanguage] = useState("ID");
+  const [currFlag, setCurrFlag] = useState("cif-Id");
   
   useEffect(() => {
     if (window.sessionStorage.getItem("language")) {
