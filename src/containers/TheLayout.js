@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { TheContent, TheSidebar, TheFooter, TheHeader } from "./index";
@@ -8,9 +7,9 @@ import PageContent from "./pageContent";
 
 const CheckLoggedIn = (props) => {
   if (!props.isLoggedIn) {
-    return <Redirect from="/" to="/login" />;
+    window.location.href = "/#/login";
   }
-  return '';
+  return "";
 };
 
 const TheLayout = () => {
@@ -22,7 +21,7 @@ const TheLayout = () => {
 
   const [currLanguage, setCurrLanguage] = useState("ID");
   const [currFlag, setCurrFlag] = useState("cif-Id");
-  
+
   useEffect(() => {
     if (window.sessionStorage.getItem("language")) {
       setCurrLanguage(window.sessionStorage.getItem("language"));
@@ -40,6 +39,8 @@ const TheLayout = () => {
     window.sessionStorage.setItem("language", language);
   }
 
+  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+
   return (
     <>
       <LanguageContext.Provider
@@ -48,21 +49,21 @@ const TheLayout = () => {
           pageContent: PageContent,
         }}
       >
-      <CheckLoggedIn isLoggedIn={true} />
-      <div className={classes}>
-        <TheSidebar />
-        <div className="c-wrapper">
-          <TheHeader 
-            currFlag={currFlag}
-            currLanguage={currLanguage}
-            languageChange={languageChange}            
-          />
-          <div className="c-body">
-            <TheContent />
+        <CheckLoggedIn isLoggedIn={isLoggedIn} />
+        <div className={classes}>
+          <TheSidebar />
+          <div className="c-wrapper">
+            <TheHeader
+              currFlag={currFlag}
+              currLanguage={currLanguage}
+              languageChange={languageChange}
+            />
+            <div className="c-body">
+              <TheContent />
+            </div>
+            <TheFooter />
           </div>
-          <TheFooter />
         </div>
-      </div>
       </LanguageContext.Provider>
     </>
   );

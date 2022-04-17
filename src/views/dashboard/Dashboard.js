@@ -1,5 +1,7 @@
+import LoadingPage from "reusable/LoadingPage";
+
 const Dashboard = () => {
-  return "";
+  return <LoadingPage />;
 };
 
 export default Dashboard;

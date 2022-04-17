@@ -32,6 +32,7 @@ const TheHeaderDropdown = () => {
     window.localStorage.removeItem("tokenCookies");
     window.localStorage.removeItem("accessList");
     window.localStorage.removeItem("profile");
+    window.localStorage.removeItem("token");
     window.localStorage.removeItem("isLoggedIn");
     window.location.href = "/#/login";
   }

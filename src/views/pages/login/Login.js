@@ -144,7 +144,10 @@ const Login = () => {
       if (error.status === false) {
         if (metadata.status === true) {
           window.localStorage.setItem("token", token);
-          window.localStorage.setItem("accessList",JSON.stringify(data1.mem_access));
+          window.localStorage.setItem(
+            "accessList",
+            JSON.stringify(data1.mem_access)
+          );
           window.localStorage.setItem("profile", JSON.stringify(data1));
           window.localStorage.setItem("isLoggedIn", "true");
 
