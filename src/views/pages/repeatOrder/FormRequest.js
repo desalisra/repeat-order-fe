@@ -183,7 +183,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.qty}
                     </CLabel>
                   </CCol>
-                  <CCol md={2}>
+                  <CCol md={3}>
                     <CInput
                       type="text"
                       id="quantity"
@@ -192,70 +192,12 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={1}>
-                    <CLabel htmlFor="remain">
-                      {language.pageContent[language.pageLanguage].RO.sisa}
-                    </CLabel>
-                  </CCol>
-                  <CCol md={2}>
-                    <CInput
-                      type="text"
-                      id="remain"
-                      size="sm"
-                      value={remainText}
-                      disabled
-                    />
-                  </CCol>
-                  <CCol md={2}>
-                    <CLabel htmlFor="hold-order">
-                      {language.pageContent[language.pageLanguage].RO.holdOR}
-                    </CLabel>
-                  </CCol>
-                  <CCol md={2}>
-                    <CInput
-                      type="text"
-                      id="hold-order"
-                      size="sm"
-                      value={orderHoldText}
-                      disabled
-                    />
-                  </CCol>
-                </CRow>
-                <CRow className="mb-1">
-                  <CCol md={2}>
-                    <CLabel htmlFor="order-unit">
-                      {language.pageContent[language.pageLanguage].RO.unitOR}
-                    </CLabel>
-                  </CCol>
-                  <CCol md={2}>
-                    <CInput
-                      type="text"
-                      id="order-unit"
-                      size="sm"
-                      value={orderUnitText}
-                      disabled
-                    />
-                  </CCol>
-                  <CCol md={1}>
-                    <CLabel htmlFor="net-price">
-                      {language.pageContent[language.pageLanguage].RO.price}
-                    </CLabel>
-                  </CCol>
-                  <CCol md={2}>
-                    <CInput
-                      type="text"
-                      id="net-price"
-                      size="sm"
-                      value={netPriceText}
-                      disabled
-                    />
-                  </CCol>
                   <CCol md={2}>
                     <CLabel htmlFor="stock">
                       {language.pageContent[language.pageLanguage].RO.stok}
                     </CLabel>
                   </CCol>
-                  <CCol md={2}>
+                  <CCol md={3}>
                     <CInput
                       type="text"
                       id="stock"
@@ -267,11 +209,41 @@ const FormRequest = () => {
                 </CRow>
                 <CRow className="mb-1">
                   <CCol md={2}>
+                    <CLabel htmlFor="order-unit">
+                      {language.pageContent[language.pageLanguage].RO.unitOR}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="order-unit"
+                      size="sm"
+                      value={orderUnitText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol md={2}>
+                    <CLabel htmlFor="hold-order">
+                      {language.pageContent[language.pageLanguage].RO.holdOR}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="hold-order"
+                      size="sm"
+                      value={orderHoldText}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol md={2}>
                     <CLabel htmlFor="order-limit">
                       {language.pageContent[language.pageLanguage].RO.limitOR}
                     </CLabel>
                   </CCol>
-                  <CCol md={2}>
+                  <CCol md={3}>
                     <CInput
                       type="text"
                       id="order-limit"
@@ -280,12 +252,88 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={1}>
+                  <CCol md={2}>
+                    <CLabel htmlFor="remain">
+                      {language.pageContent[language.pageLanguage].RO.sisa}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="remain"
+                      size="sm"
+                      value={remainText}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol md={2}>
+                    <CLabel htmlFor="local-product">
+                      {language.pageContent[language.pageLanguage].RO.lclprod}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="local-product"
+                      size="sm"
+                      value={orderLimitText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol md={2}>
+                    <CLabel htmlFor="net-price">
+                      {language.pageContent[language.pageLanguage].RO.price}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="net-price"
+                      size="sm"
+                      value={netPriceText}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol md={2}>
+                    <CLabel htmlFor="user-update">
+                      {language.pageContent[language.pageLanguage].RO.usrupdate}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="user-update"
+                      size="sm"
+                      value={orderLimitText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol md={2}>
+                    <CLabel htmlFor="net-price-total">
+                      {language.pageContent[language.pageLanguage].RO.pricetot}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="net-price-total"
+                      size="sm"
+                      value={netPriceText}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol md={2}>
                     <CLabel htmlFor="nota-or">
                       {language.pageContent[language.pageLanguage].RO.note}
                     </CLabel>
                   </CCol>
-                  <CCol md={6}>
+                  <CCol md={10}>
                     <CInput
                       type="text"
                       id="nota-or"

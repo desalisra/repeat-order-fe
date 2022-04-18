@@ -16,24 +16,16 @@ import {
 } from "@coreui/react";
 
 import DataTable from "reusable/DataTable";
+import LanguageContext from "containers/languageContext";
 
 import { Context } from "./ReapeatOrder";
 import { data } from "./dummyData";
 
-const fields = [
-  { key: "Req_ProdCode", label: "Procode" },
-  { key: "Req_Qty", label: "Quantity" },
-  { key: "Req_LastUpdate", label: "Confirm Date" },
-  { key: "Req_RecQty", label: "Order Unit" },
-  { key: "Req_ROQty", label: "Order Qty" },
-  { key: "Req_OrderLimit", label: "Order Limit" },
-  { key: "Req_HONum", label: "Remain" },
-  { key: "Req_PurchNum", label: "Net Price" },
-];
 
 const datalist = data;
 
 const DataRequest = () => {
+  let language = React.useContext(LanguageContext);
   let ctx = React.useContext(Context);
   const [activeKey, setActiveKey] = useState(1);
 
@@ -43,6 +35,18 @@ const DataRequest = () => {
       data: e,
     });
   };
+
+  const fields = [
+    { key: "Req_ProdCode", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprocod },
+    { key: "Req_Qty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqty },
+    { key: "Req_LastUpdate", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldtglconfirm },
+    { key: "Req_RecQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldunitOR },
+    { key: "Req_ROQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqtyOR },
+    { key: "Req_OrderLimit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldlimitOR },
+    { key: "Req_HONum", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldsisa },
+    { key: "Req_PurchNum", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprice },
+    { key: "Req_PurchNum", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldpricetot },
+  ];
 
   return (
     <CContainer fluid>
@@ -55,7 +59,7 @@ const DataRequest = () => {
                   active={activeKey === 1}
                   onClick={() => setActiveKey(1)}
                 >
-                  ALL
+                  {language.pageContent[language.pageLanguage].RO.taball}
                 </CNavLink>
               </CNavItem>
               <CNavItem>
@@ -63,7 +67,7 @@ const DataRequest = () => {
                   active={activeKey === 2}
                   onClick={() => setActiveKey(2)}
                 >
-                  LOCAL
+                  {language.pageContent[language.pageLanguage].RO.tablocal}
                 </CNavLink>
               </CNavItem>
             </CNav>
@@ -86,7 +90,7 @@ const DataRequest = () => {
                         htmlFor="grand-total"
                         className="col-sm-3 col-form-label"
                       >
-                        <b>Grand Total:</b>
+                        <b>{language.pageContent[language.pageLanguage].RO.lblgtotal}</b>
                       </CLabel>
                       <CCol md={4}>
                         <CInput
@@ -118,7 +122,7 @@ const DataRequest = () => {
                         htmlFor="grand-total"
                         className="col-sm-3 col-form-label"
                       >
-                        <b>Grand Total:</b>
+                        <b>{language.pageContent[language.pageLanguage].RO.lblgtotal}</b>
                       </CLabel>
                       <CCol md={4}>
                         <CInput

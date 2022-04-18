@@ -60,8 +60,6 @@ const HeaderRo = () => {
   };
 
   const getRequestOrder = async (orderNum) => {
-    let url = get_request_order + "&Req_Number=" + orderNum;
-    console.log(url);
     let data = await axios({
       method: "get",
       url: get_request_order + "&Req_Number=" + orderNum,
