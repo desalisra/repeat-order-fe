@@ -23,7 +23,7 @@ const fields = [
   { key: "Req_TotalNetPrice", label: "Grand Total" },
 ];
 
-const HeaderRo = () => {
+const HeaderRo = () => {  
   let language = React.useContext(LanguageContext);
   let ctx = React.useContext(Context);
 
@@ -80,7 +80,6 @@ const HeaderRo = () => {
   };
 
   const handilingKeyUp = async (e) => {
-    console.log(orderNumbText);
     if (e.keyCode === 13) {
       e.preventDefault();
       await getRequestOrder(orderNumbText);

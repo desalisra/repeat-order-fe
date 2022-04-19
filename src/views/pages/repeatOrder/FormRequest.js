@@ -38,8 +38,11 @@ const FormRequest = () => {
   const [orderHoldText, setOrdeHoldText] = useState("");
   const [orderUnitText, setOrderUnitText] = useState("");
   const [netPriceText, setNetPriceText] = useState("");
+  const [netPriceTotalText, setNetPriceTotalText] = useState("");
   const [stockText, setStockText] = useState("");
   const [orderLimitText, setOrderLimitText] = useState("");
+  const [localPRoductText, setLocalPRoductText] = useState("");
+  const [userUpdateText, setUserUpdateText] = useState("");
   const [noteORText, setNoteORText] = useState("");
 
   const [modal, setModal] = useState(false);
@@ -91,15 +94,18 @@ const FormRequest = () => {
 
   const setFormInput = () => {
     setProcodeText(ctx.state.rowData.Req_ProdCode);
-    setPronameText(ctx.state.rowData.Req_Qty);
-    // setOrderQtyText(ctx.state.rowData["Order Qty"]);
-    // setQtyText(ctx.state.rowData.Quantity);
+    // setPronameText(ctx.state.rowData.Req_Qty);
+    setOrderQtyText(ctx.state.rowData.Req_ROQty);
+    setQtyText(ctx.state.rowData.Req_Qty);
     // setRemainText(ctx.state.rowData.Remain);
     // setOrdeHoldText("");
     // setOrderUnitText(ctx.state.rowData["Order Unit"]);
     // setNetPriceText(ctx.state.rowData["Net Price"]);
+    // setNetPriceTotalText(ctx.state.rowData["Net Price"]);
     // setStockText("");
-    // setOrderLimitText(ctx.state.rowData["Order Limit"]);
+    setOrderLimitText(ctx.state.rowData.Req_OrderLimit);
+    // setLocalPRoductText(ctx.state.rowData.Req_LocalProduct);
+    setUserUpdateText(ctx.state.rowData.Req_UserID);
     // setNoteORText("");
   };
 
@@ -112,8 +118,11 @@ const FormRequest = () => {
     setOrdeHoldText("");
     setOrderUnitText("");
     setNetPriceText("");
+    setNetPriceTotalText("");
     setStockText("");
     setOrderLimitText("");
+    setLocalPRoductText("");
+    setUserUpdateText("");
     setNoteORText("");
   };
 
@@ -278,7 +287,7 @@ const FormRequest = () => {
                       type="text"
                       id="local-product"
                       size="sm"
-                      value={orderLimitText}
+                      value={localPRoductText}
                       disabled
                     />
                   </CCol>
@@ -308,7 +317,7 @@ const FormRequest = () => {
                       type="text"
                       id="user-update"
                       size="sm"
-                      value={orderLimitText}
+                      value={userUpdateText}
                       disabled
                     />
                   </CCol>
@@ -322,7 +331,7 @@ const FormRequest = () => {
                       type="text"
                       id="net-price-total"
                       size="sm"
-                      value={netPriceText}
+                      value={netPriceTotalText}
                       disabled
                     />
                   </CCol>

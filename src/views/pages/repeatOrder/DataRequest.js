@@ -39,7 +39,7 @@ const DataRequest = () => {
   const fields = [
     { key: "Req_ProdCode", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprocod },
     { key: "Req_Qty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqty },
-    { key: "Req_LastUpdate", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldtglconfirm },
+    // { key: "Req_LastUpdate", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldtglconfirm },
     { key: "Req_RecQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldunitOR },
     { key: "Req_ROQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqtyOR },
     { key: "Req_OrderLimit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldlimitOR },
@@ -113,7 +113,7 @@ const DataRequest = () => {
                 <DataTable
                   items={datalist}
                   fields={fields}
-                  getRowData={(e) => getRowData(e)}
+                  getRowData=""
                 />
                 <CRow className="d-flex justify-content-end">
                   <CCol md={6}>
