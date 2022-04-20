@@ -4,6 +4,7 @@ import HeaderRo from "./HeaderRO";
 import ButtonOption from "./ButtonOption";
 import DataRequest from "./DataRequest";
 import FormRequest from "./FormRequest";
+//import { data } from "./dummyData";
 
 export const Context = React.createContext();
 const Provider = Context.Provider;
@@ -15,7 +16,8 @@ const RepeatOrder = () => {
   const state = {
     rowsData,
     rowData,
-  };
+  };  
+
   const dispacth = (action) => {
     if (action.type === "SET_ROWSDATA") {
       return setRowsData(action.data);
@@ -36,17 +38,19 @@ const RepeatOrder = () => {
           dispacth: dispacth,
         }}
       >
-        {/* Request Header */}
-        <HeaderRo />
 
-        {/* Request Option */}
-        <ButtonOption />
+          {/* Request Header */}
+          <HeaderRo />
 
-        {/* Data Request */}
-        <DataRequest />
+          {/* Request Option */}
+          <ButtonOption />
 
-        {/* Form Request */}
-        <FormRequest />
+          {/* Data Request */}
+          <DataRequest />
+
+          {/* Form Request */}
+          <FormRequest /> 
+
       </Provider>
     </>
   );

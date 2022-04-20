@@ -13,7 +13,12 @@ import {
 import ListModal from "reusable/ListModal";
 import LanguageContext from "containers/languageContext";
 import { Context } from "./ReapeatOrder";
+import { ContextLoad } from "containers/TheLayout";
 import { get_order_numb, get_request_order } from "./RepeatOrderLink";
+
+
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const fields = [
   { key: "Req_Number", label: "Order number" },
@@ -26,12 +31,13 @@ const fields = [
 const HeaderRo = () => {  
   let language = React.useContext(LanguageContext);
   let ctx = React.useContext(Context);
+  let ctxload = React.useContext(ContextLoad);
 
   const [orderNumbText, setOrderNumbText] = useState("");
   const [modal, setModal] = useState(false);
   const [listOrder, setListOrder] = useState([]);
 
-  const showModal = async () => {
+  const showModal = async () => {    
     let data = await axios({
       method: "get",
       url: get_order_numb,
@@ -43,8 +49,7 @@ const HeaderRo = () => {
       .catch((err) => {
         window.alert(err);
         return true;
-      });
-
+      });       
     await setListOrder(data);
     setModal(!modal);
   };
@@ -52,7 +57,7 @@ const HeaderRo = () => {
   const closeModal = () => {
     setModal(!modal);
   };
-
+  
   const selectListOrder = async (e) => {
     await setOrderNumbText(e.Req_Number);
     await getRequestOrder(e.Req_Number);
@@ -60,6 +65,8 @@ const HeaderRo = () => {
   };
 
   const getRequestOrder = async (orderNum) => {
+    await ctxload.setLoading(true);
+
     let data = await axios({
       method: "get",
       url: get_request_order + "&Req_Number=" + orderNum,
@@ -76,7 +83,8 @@ const HeaderRo = () => {
     await ctx.dispacth({
       type: "SET_ROWSDATA",
       data: data[0].td_reqprod,
-    });
+    });   
+    await ctxload.setLoading(false);
   };
 
   const handilingKeyUp = async (e) => {

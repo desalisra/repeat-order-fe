@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import LoadingOverlay from 'react-loading-overlay';
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { TheContent, TheSidebar, TheFooter, TheHeader } from "./index";
 import LanguageContext from "./languageContext";
 import PageContent from "./pageContent";
+
+export const ContextLoad = React.createContext();
+const ProviderLoad = ContextLoad.Provider;
 
 const CheckLoggedIn = (props) => {
   if (!props.isLoggedIn) {
@@ -21,6 +25,7 @@ const TheLayout = () => {
 
   const [currLanguage, setCurrLanguage] = useState("ID");
   const [currFlag, setCurrFlag] = useState("cif-Id");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (window.sessionStorage.getItem("language")) {
@@ -58,8 +63,20 @@ const TheLayout = () => {
               currLanguage={currLanguage}
               languageChange={languageChange}
             />
+
             <div className="c-body">
-              <TheContent />
+              <ProviderLoad
+                value={{setLoading}}
+              > 
+                <LoadingOverlay
+                  active={loading}
+                  spinner
+                  text= "loading in progress"
+                  // {language.pageContent[language.pageLanguage].RO.loadingMessage}
+                >
+                  <TheContent />
+                </LoadingOverlay>
+             </ProviderLoad>
             </div>
             <TheFooter />
           </div>
