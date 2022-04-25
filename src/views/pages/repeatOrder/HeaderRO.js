@@ -65,8 +65,8 @@ const HeaderRo = () => {
   };
   
   const selectListOrder = async (e) => {
-    await setOrderNumbText(e.Req_Number);
-    await getRequestOrder(e.Req_Number);
+    await setOrderNumbText(e.Number);
+    await getRequestOrder(e.Number);
     setModal(!modal);
   };
 
@@ -93,7 +93,7 @@ const HeaderRo = () => {
     await ctxload.setLoading(false);
   };
 
-  const handilingKeyUp = async (e) => {
+  const handlingKeyUp = async (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
       await getRequestOrder(orderNumbText);
@@ -160,7 +160,7 @@ const HeaderRo = () => {
                       id="order-numb"
                       value={orderNumbText}
                       onChange={(e) => setOrderNumbText(e.target.value)}
-                      onKeyUp={(e) => handilingKeyUp(e)}
+                      onKeyUp={(e) => handlingKeyUp(e)}
                     />
                   </CCol>
                   <CButton color="light" onClick={showModal}>
