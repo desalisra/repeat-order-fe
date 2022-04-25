@@ -134,12 +134,12 @@ const FormRequest = () => {
             <CRow>
               <CCol md={10}>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="procode">
                       {language.pageContent[language.pageLanguage].RO.product}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="procode"
@@ -149,7 +149,7 @@ const FormRequest = () => {
                       disabled={procodeDisabled}
                     />
                   </CCol>
-                  <CCol md={6}>
+                  <CCol className="px-0" md={7}>
                     <CInput
                       type="text"
                       value={pronameText}
@@ -157,7 +157,7 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={1}>
+                  <CCol className="pl-1"md={1}>
                     <CButton
                       color="light"
                       size="sm"
@@ -170,7 +170,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="order-qty">
                       {language.pageContent[language.pageLanguage].RO.qtyOR}
                     </CLabel>
@@ -187,7 +187,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="quantity">
                       {language.pageContent[language.pageLanguage].RO.qty}
                     </CLabel>
@@ -201,7 +201,7 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="stock">
                       {language.pageContent[language.pageLanguage].RO.stok}
                     </CLabel>
@@ -217,7 +217,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="order-unit">
                       {language.pageContent[language.pageLanguage].RO.unitOR}
                     </CLabel>
@@ -231,7 +231,7 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="hold-order">
                       {language.pageContent[language.pageLanguage].RO.holdOR}
                     </CLabel>
@@ -247,7 +247,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="order-limit">
                       {language.pageContent[language.pageLanguage].RO.limitOR}
                     </CLabel>
@@ -261,7 +261,7 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="remain">
                       {language.pageContent[language.pageLanguage].RO.sisa}
                     </CLabel>
@@ -277,7 +277,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="local-product">
                       {language.pageContent[language.pageLanguage].RO.lclprod}
                     </CLabel>
@@ -291,7 +291,7 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="net-price">
                       {language.pageContent[language.pageLanguage].RO.price}
                     </CLabel>
@@ -307,7 +307,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="user-update">
                       {language.pageContent[language.pageLanguage].RO.usrupdate}
                     </CLabel>
@@ -321,7 +321,7 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="net-price-total">
                       {language.pageContent[language.pageLanguage].RO.pricetot}
                     </CLabel>
@@ -337,7 +337,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
                 <CRow className="mb-1">
-                  <CCol md={2}>
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="nota-or">
                       {language.pageContent[language.pageLanguage].RO.note}
                     </CLabel>
@@ -353,7 +353,7 @@ const FormRequest = () => {
                   </CCol>
                 </CRow>
               </CCol>
-              <CCol md={2}>
+              <CCol className="border-left border-1" md={2}>
                 <CButton
                   color="light"
                   className="mb-2"

@@ -25,7 +25,7 @@ const _nav = [
     to: "/repeat-order",
     icon: (
       <FontAwesomeIcon
-        icon={faListAlt}
+        icoc={faListAlt}
         size={"lg"}
         className="c-sidebar-nav-icon"
       />

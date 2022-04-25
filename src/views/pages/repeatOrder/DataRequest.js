@@ -86,12 +86,11 @@ const DataRequest = () => {
                 <CRow className="d-flex justify-content-end">
                   <CCol md={6}>
                     <CRow className="d-flex justify-content-end">
-                      <CLabel
-                        htmlFor="grand-total"
-                        className="col-sm-3 col-form-label"
-                      >
-                        <b>{language.pageContent[language.pageLanguage].RO.lblgtotal}</b>
-                      </CLabel>
+                      <CCol className="pr-0 pt-1 text-right" md={3}>
+                        <CLabel htmlFor="grand-total">
+                          <b>{language.pageContent[language.pageLanguage].RO.lblgtotal}</b>
+                        </CLabel>
+                      </CCol>
                       <CCol md={4}>
                         <CInput
                           type="text"
@@ -118,12 +117,11 @@ const DataRequest = () => {
                 <CRow className="d-flex justify-content-end">
                   <CCol md={6}>
                     <CRow className="d-flex justify-content-end">
-                      <CLabel
-                        htmlFor="grand-total"
-                        className="col-sm-3 col-form-label"
-                      >
-                        <b>{language.pageContent[language.pageLanguage].RO.lblgtotal}</b>
-                      </CLabel>
+                      <CCol className="pr-0 pt-1 text-right" md={3}>
+                        <CLabel htmlFor="grand-total">
+                          <b>{language.pageContent[language.pageLanguage].RO.lblgtotal}</b>
+                        </CLabel>
+                      </CCol>
                       <CCol md={4}>
                         <CInput
                           type="text"

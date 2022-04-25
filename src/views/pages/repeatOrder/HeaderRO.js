@@ -21,11 +21,11 @@ import { get_order_numb, get_request_order } from "./RepeatOrderLink";
 //import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const fields = [
-  { key: "Req_Number", label: "Order number" },
-  { key: "Req_ConfirmYN", label: "Order status" },
-  { key: "Req_Date", label: "Confirm Date" },
-  { key: "Req_ConfirmBy", label: "Confirm By" },
-  { key: "Req_TotalNetPrice", label: "Grand Total" },
+  { key: "Number", label: "Order number" },
+  { key: "ConfirmYN", label: "Order status" },
+  { key: "LastUpdate", label: "Confirm Date" },
+  { key: "ConfirmBy", label: "Confirm By" },
+  { key: "TotalNettPrice", label: "Grand Total" },
 ];
 
 const HeaderRo = () => {  
@@ -44,6 +44,12 @@ const HeaderRo = () => {
       responseType: "json",
     })
       .then((res) => {
+        console.log(res);
+        res = res.data;
+        if(res.error.status){
+          alert(res.error.msg)
+          return false;
+        }
         return res.data;
       })
       .catch((err) => {
@@ -126,9 +132,9 @@ const HeaderRo = () => {
                 <CRow className="mb-3">
                   <CLabel
                     htmlFor="login-info"
-                    className="col-sm-3 col-form-label"
+                    className="col-sm-3 col-form-label col pr-0"
                   >
-                    Login Info :
+                    Login Info
                   </CLabel>
                   <CCol sm={9}>
                     <CInput
