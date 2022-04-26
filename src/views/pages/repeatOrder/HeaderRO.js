@@ -14,16 +14,12 @@ import ListModal from "reusable/ListModal";
 import LanguageContext from "containers/languageContext";
 import { Context } from "./ReapeatOrder";
 import { ContextLoad } from "containers/TheLayout";
-import { get_order_numb, get_request_order } from "./RepeatOrderLink";
-
-
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { get_request } from "./RepeatOrderLink";
 
 const fields = [
   { key: "Number", label: "Order number" },
   { key: "ConfirmYN", label: "Order status" },
-  { key: "LastUpdate", label: "Confirm Date" },
+  { key: "Date", label: "Confirm Date" },
   { key: "ConfirmBy", label: "Confirm By" },
   { key: "TotalNettPrice", label: "Grand Total" },
 ];
@@ -37,10 +33,11 @@ const HeaderRo = () => {
   const [modal, setModal] = useState(false);
   const [listOrder, setListOrder] = useState([]);
 
-  const showModal = async () => {    
+  const showModal = async () => {   
+    await ctxload.setLoading(true); 
     let data = await axios({
       method: "get",
-      url: get_order_numb,
+      url: get_request,
       responseType: "json",
     })
       .then((res) => {
@@ -56,6 +53,7 @@ const HeaderRo = () => {
         return true;
       });       
     await setListOrder(data);
+    await ctxload.setLoading(false);
     setModal(!modal);
   };
 
@@ -64,35 +62,37 @@ const HeaderRo = () => {
   };
   
   const selectListOrder = async (e) => {
+    setModal(!modal);
     await setOrderNumbText(e.Number);
     //console.log(e.Number);
     await getRequestOrder(e.Number);
-    setModal(!modal);
   };
 
   const getRequestOrder = async (orderNum) => {
     await ctxload.setLoading(true);
-
-    let data = await axios({
+    await axios({
       method: "get",
-      url: get_request_order + "&Req_Number=" + orderNum,
+      url: get_request + "/" + orderNum,
       responseType: "json",
     })
       .then((res) => {
 
-        return res.data;
+        res = res.data;
+        if(res.error.status){
+          alert(res.error.msg)
+          return false;
+        }
+
+        ctx.dispacth.setGrandTotal(res.data.TotalNettPrice); 
+        ctx.dispacth.setRowsData(res.data.ReqDetail); 
+        ctxload.setLoading(false);
+        return false;
       })
       .catch((err) => {
-        window.alert(err);                
+        window.alert(err);
         ctxload.setLoading(false);
-        return true;
+        return false;
       });
-
-    await ctx.dispacth({
-      type: "SET_ROWSDATA",
-      data: data[0].td_reqprod,
-    });
-    await ctxload.setLoading(false);
   };
 
   const handlingKeyUp = async (e) => {

@@ -13,18 +13,20 @@ import {
 import ListModal from "reusable/ListModal";
 
 import LanguageContext from "containers/languageContext";
+import { ContextLoad } from "containers/TheLayout";
 import { Context } from "./ReapeatOrder";
 import { get_products } from "./RepeatOrderLink";
 
 const fields = [
-  { key: "procode", label: "Procode" },
-  { key: "product_name", label: "product description" },
-  { key: "product_HNA", label: "product HNA" },
+  { key: "ROProcod", label: "Procode" },
+  { key: "ROName", label: "product description" },
+  { key: "RONettPrice", label: "product HNA" },
 ];
 
 const FormRequest = () => {
   let language = React.useContext(LanguageContext);
   let ctx = React.useContext(Context);
+  let ctxload = React.useContext(ContextLoad);
 
   const [procodeDisabled, setProcodeDisabled] = useState(true);
   const [orderQtyDisabled, setOrderQtyDisabled] = useState(true);
@@ -49,33 +51,59 @@ const FormRequest = () => {
   const [listProduct, setListProduct] = useState([]);
 
   const showModal = async () => {
-    let data = await axios({
+    await ctxload.setLoading(true); 
+    await axios({
       method: "get",
       url: get_products,
       responseType: "json",
     })
       .then((res) => {
-        return res.data;
+        res = res.data;
+        if(res.error.status){
+          alert(res.error.msg)
+          return false;
+        }
+        setListProduct(res.data);
+        setModal(!modal);
       })
       .catch((err) => {
         window.alert(err);
-        return true;
       });
 
-    if (data === true) {
-      return true;
-    }
-
-    await setListProduct(data);
-    setModal(!modal);
+      await ctxload.setLoading(false); 
   };
 
   const closeModal = () => {
     setModal(!modal);
   };
 
+  const selectListProduct = async (e) => {
+    setModal(!modal);
+    await setProcodeText(e.ROProcod);
+    await ctxload.setLoading(true); 
+    await axios({
+      method: "get",
+      url: get_products + "/" + e.ROProcod,
+      responseType: "json",
+    })
+      .then((res) => {
+        res = res.data;
+        if(res.error.status){
+          alert(res.error.msg)
+          return false;
+        }
+        ctx.dispacth.setRowData(res.data)
+      })
+      .catch((err) => {
+        window.alert(err);
+      });
+
+    await ctxload.setLoading(false); 
+  };
+
+
   const btnAddClick = () => {
-    ctx.dispacth({ type: "CLEAR_FORMINPUT" });
+    ctx.dispacth.setRowData({});
     clearFormInput();
     setbtnEnabled(!btnEnabled);
     setProcodeDisabled(!procodeDisabled);
@@ -93,19 +121,19 @@ const FormRequest = () => {
   });
 
   const setFormInput = () => {
-    setProcodeText(ctx.state.rowData.Req_ProdCode);
-    // setPronameText(ctx.state.rowData.Req_Qty);
+    setProcodeText(ctx.state.rowData.ReqProdCode);
+    setPronameText(ctx.state.rowData.ROName);
     setOrderQtyText(ctx.state.rowData.Req_ROQty);
-    setQtyText(ctx.state.rowData.Req_Qty);
-    // setRemainText(ctx.state.rowData.Remain);
+    setQtyText(ctx.state.rowData.ReqQty);
+    setRemainText(ctx.state.rowData.Remain);
     // setOrdeHoldText("");
     // setOrderUnitText(ctx.state.rowData["Order Unit"]);
-    // setNetPriceText(ctx.state.rowData["Net Price"]);
-    // setNetPriceTotalText(ctx.state.rowData["Net Price"]);
+    setNetPriceText(ctx.state.rowData.RONettPrice);
+    setNetPriceTotalText(ctx.state.rowData.ReqTotalNettPrice);
     // setStockText("");
-    setOrderLimitText(ctx.state.rowData.Req_OrderLimit);
+    setOrderLimitText(ctx.state.rowData.ReqOrderLimit);
     // setLocalPRoductText(ctx.state.rowData.Req_LocalProduct);
-    setUserUpdateText(ctx.state.rowData.Req_UserID);
+    // setUserUpdateText(ctx.state.rowData.Req_UserID);
     // setNoteORText("");
   };
 
@@ -408,6 +436,7 @@ const FormRequest = () => {
         title="List Product"
         fields={fields}
         items={listProduct}
+        getRowData={(e) => selectListProduct(e)}
       />
     </>
   );

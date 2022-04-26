@@ -19,10 +19,7 @@ import DataTable from "reusable/DataTable";
 import LanguageContext from "containers/languageContext";
 
 import { Context } from "./ReapeatOrder";
-import { data } from "./dummyData";
 
-
-const datalist = data;
 
 const DataRequest = () => {
   let language = React.useContext(LanguageContext);
@@ -30,22 +27,18 @@ const DataRequest = () => {
   const [activeKey, setActiveKey] = useState(1);
 
   const getRowData = (e) => {
-    ctx.dispacth({
-      type: "SET_ROWDATA",
-      data: e,
-    });
+    ctx.dispacth.setRowData(e);
   };
 
   const fields = [
-    { key: "Req_ProdCode", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprocod },
-    { key: "Req_Qty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqty },
-    // { key: "Req_LastUpdate", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldtglconfirm },
+    { key: "ReqProdCode", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprocod },
+    { key: "ReqQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqty },
     { key: "Req_RecQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldunitOR },
     { key: "Req_ROQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqtyOR },
-    { key: "Req_OrderLimit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldlimitOR },
-    { key: "Req_HONum", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldsisa },
-    { key: "Req_PurchNum", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprice },
-    { key: "Req_PurchNum", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldpricetot },
+    { key: "ReqOrderLimit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldlimitOR },
+    { key: "Remain", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldsisa },
+    { key: "RONettPrice", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprice },
+    { key: "ReqTotalNettPrice", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldpricetot },
   ];
 
   return (
@@ -96,7 +89,7 @@ const DataRequest = () => {
                           type="text"
                           id="grand-total"
                           size="sm"
-                          value="100.000.000"
+                          value={ctx.state.grandTotal}
                           disabled
                         />
                       </CCol>
@@ -110,7 +103,7 @@ const DataRequest = () => {
                 visible={activeKey === 2}
               >
                 <DataTable
-                  items={datalist}
+                  items=""
                   fields={fields}
                   getRowData=""
                 />
