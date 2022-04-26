@@ -4,6 +4,9 @@ const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const RepeatOrder = React.lazy(() =>
   import("./views/pages/repeatOrder/ReapeatOrder")
 );
+const ComponentToPrint = React.lazy(() =>
+  import("./views/pages/repeatOrder/ComponentToPrint")
+);
 
 const routes = [
   { path: "/", exact: true, name: "Master" },
@@ -14,6 +17,7 @@ const routes = [
     name: "Repeat Order",
     component: RepeatOrder,
   },
+  {path: "/print", exact: true, name: "test",component: ComponentToPrint},
 ];
 
 
