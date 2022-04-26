@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import{
     CContainer,
     CRow,
@@ -7,8 +7,12 @@ import{
 } from "@coreui/react";
 import LanguageContext from "containers/languageContext";
 
+import ReactToPrint from 'react-to-print';
+import { ComponentToPrint } from "./ComponentToPrint";
+
 const ButtonOption = () => {
     let language = React.useContext(LanguageContext);
+    let componentRef = useRef();
 
     return(
         <CContainer fluid className="mb-2">
@@ -20,9 +24,17 @@ const ButtonOption = () => {
                     <CButton color="dark" className="mr-2">
                         {language.pageContent[language.pageLanguage].RO.konfirmasi}
                     </CButton>
-                    <CButton color="dark">
-                        {language.pageContent[language.pageLanguage].print}
-                    </CButton>
+                    
+                    <ReactToPrint
+                        trigger={() => <CButton color="dark">
+                                         {language.pageContent[language.pageLanguage].print}
+                                       </CButton>}
+                        content={() => componentRef}
+                    />
+                    <div style={{ display: "none" }}> 
+                        <ComponentToPrint ref={el => (componentRef = el)} />
+                    </div>
+
                 </CCol>
             </CRow>
         </CContainer>

@@ -44,7 +44,6 @@ const HeaderRo = () => {
       responseType: "json",
     })
       .then((res) => {
-        console.log(res);
         res = res.data;
         if(res.error.status){
           alert(res.error.msg)
@@ -66,6 +65,7 @@ const HeaderRo = () => {
   
   const selectListOrder = async (e) => {
     await setOrderNumbText(e.Number);
+    //console.log(e.Number);
     await getRequestOrder(e.Number);
     setModal(!modal);
   };
@@ -79,17 +79,19 @@ const HeaderRo = () => {
       responseType: "json",
     })
       .then((res) => {
+
         return res.data;
       })
       .catch((err) => {
-        window.alert(err);
+        window.alert(err);                
+        ctxload.setLoading(false);
         return true;
       });
 
     await ctx.dispacth({
       type: "SET_ROWSDATA",
       data: data[0].td_reqprod,
-    });   
+    });
     await ctxload.setLoading(false);
   };
 
@@ -154,7 +156,7 @@ const HeaderRo = () => {
                   {language.pageContent[language.pageLanguage].RO.noorder}
                 </CLabel>
                 <CRow>
-                  <CCol xs={10} md={10}>
+                  <CCol className="pr-0" xs={10} md={10}>
                     <CInput
                       type="text"
                       id="order-numb"
@@ -163,12 +165,15 @@ const HeaderRo = () => {
                       onKeyUp={(e) => handlingKeyUp(e)}
                     />
                   </CCol>
-                  <CButton color="light" onClick={showModal}>
-                    ...
-                  </CButton>
+                  <CCol className="pr-0">
+                    <CButton color="light" onClick={showModal}>
+                      ...
+                    </CButton>
+                  </CCol>
                 </CRow>
+
                 <CRow className="mt-3">
-                  <CCol xs={12} md={4}>
+                  <CCol className="pr-2" xs={12} md={4}>
                     <CLabel htmlFor="order-status">
                       {language.pageContent[language.pageLanguage].RO.status}
                     </CLabel>
@@ -180,12 +185,9 @@ const HeaderRo = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol xs={12} md={4}>
+                  <CCol className="pl-0 pr-2" xs={12} md={4}>
                     <CLabel htmlFor="confirm-date">
-                      {
-                        language.pageContent[language.pageLanguage].RO
-                          .tglconfirm
-                      }
+                      { language.pageContent[language.pageLanguage].RO.tglconfirm}
                     </CLabel>
                     <CInput
                       type="text"
@@ -195,7 +197,7 @@ const HeaderRo = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol xs={12} md={4}>
+                  <CCol className="pl-0 pr-2" xs={12} md={4}>
                     <CLabel htmlFor="confirm-by">
                       {language.pageContent[language.pageLanguage].RO.confirm}
                     </CLabel>
