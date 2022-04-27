@@ -46,15 +46,16 @@ const HeaderRo = () => {
           alert(res.error.msg)
           return false;
         }
-        return res.data;
+
+         setListOrder(res.data);
+         setModal(!modal);
       })
       .catch((err) => {
         window.alert(err);
         return true;
       });       
-    await setListOrder(data);
-    await ctxload.setLoading(false);
-    setModal(!modal);
+
+      ctxload.setLoading(false);
   };
 
   const closeModal = () => {
@@ -76,13 +77,11 @@ const HeaderRo = () => {
       responseType: "json",
     })
       .then((res) => {
-
         res = res.data;
         if(res.error.status){
           alert(res.error.msg)
           return false;
         }
-
         ctx.dispacth.setGrandTotal(res.data.TotalNettPrice); 
         ctx.dispacth.setRowsData(res.data.ReqDetail); 
         ctxload.setLoading(false);
@@ -185,7 +184,7 @@ const HeaderRo = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol className="pl-0 pr-2" xs={12} md={4}>
+                  <CCol className="pr-2" xs={12} md={4}>
                     <CLabel htmlFor="confirm-date">
                       { language.pageContent[language.pageLanguage].RO.tglconfirm}
                     </CLabel>
@@ -197,7 +196,7 @@ const HeaderRo = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol className="pl-0 pr-2" xs={12} md={4}>
+                  <CCol className="pr-2" xs={12} md={4}>
                     <CLabel htmlFor="confirm-by">
                       {language.pageContent[language.pageLanguage].RO.confirm}
                     </CLabel>

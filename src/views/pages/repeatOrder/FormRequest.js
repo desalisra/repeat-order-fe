@@ -213,6 +213,20 @@ const FormRequest = () => {
                       disabled={orderQtyDisabled}
                     />
                   </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="order-unit">
+                      {language.pageContent[language.pageLanguage].RO.unitOR}
+                    </CLabel>
+                  </CCol>
+                  <CCol md={3}>
+                    <CInput
+                      type="text"
+                      id="order-unit"
+                      size="sm"
+                      value={orderUnitText}
+                      disabled
+                    />
+                  </CCol>
                 </CRow>
                 <CRow className="mb-1">
                   <CCol className="pr-0" md={2}>
@@ -226,36 +240,6 @@ const FormRequest = () => {
                       id="quantity"
                       size="sm"
                       value={qtyText}
-                      disabled
-                    />
-                  </CCol>
-                  <CCol className="pr-0" md={2}>
-                    <CLabel htmlFor="stock">
-                      {language.pageContent[language.pageLanguage].RO.stok}
-                    </CLabel>
-                  </CCol>
-                  <CCol md={3}>
-                    <CInput
-                      type="text"
-                      id="stock"
-                      size="sm"
-                      value={stockText}
-                      disabled
-                    />
-                  </CCol>
-                </CRow>
-                <CRow className="mb-1">
-                  <CCol className="pr-0" md={2}>
-                    <CLabel htmlFor="order-unit">
-                      {language.pageContent[language.pageLanguage].RO.unitOR}
-                    </CLabel>
-                  </CCol>
-                  <CCol md={3}>
-                    <CInput
-                      type="text"
-                      id="order-unit"
-                      size="sm"
-                      value={orderUnitText}
                       disabled
                     />
                   </CCol>
