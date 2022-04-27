@@ -9,8 +9,6 @@ import React from "react";
 //   CLabel,
 // } from "@coreui/react";
 
-
-
 export const ComponentToPrint = React.forwardRef((props, ref) => {
     
   // const formatDate = () => {
@@ -75,7 +73,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
 
       <br></br>
 
-      {/* <table>
+      <table>
         <tbody>
           <tr>
             <td align="left" valign="top" width="50px" colspan="3">KEPADA :</td>
@@ -96,22 +94,25 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
 
       <br></br>
 
-      <table>          
-        <thead>
-          <tr>
-            <th>Procod</th>
-            <th>Pro.Name</th>
-            <th>Qty</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td align="left" valign="top" width="30px">0303990</td>
-            <td align="left" valign="top" width="100px">LAXING TEA LEMON 15 BAGS</td>
-            <td align="left" valign="top" width="50px">/5</td>
-          </tr>
-        </tbody>
-      </table> */}
+      <table>
+        <tr>
+          <td colSpan={3}>===================================</td>
+        </tr>
+        <tr>
+          <td>Procode</td>
+          <td>Pro. Name</td>
+          <td align="right">Qty</td>
+        </tr>
+        <tr>
+          <td colSpan={3}>===================================</td>
+        </tr>
+        {indents}
+        <tr>
+          <td colSpan={3}>===================================</td>
+        </tr>
+      </table>
+
+      <p>Pemesan</p>
     </div>
   );
 });
