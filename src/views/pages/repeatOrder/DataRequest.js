@@ -145,7 +145,7 @@ const DataRequest = () => {
                       <td>{numberFormat(item.ReqNettPriceTotal)}</td>
                     ),
                   }}
-                  getRowData=""
+                  getRowData={(e) => getRowData(e)}
                 />
                 <CRow className="d-flex justify-content-end">
                   <CCol md={6}>
