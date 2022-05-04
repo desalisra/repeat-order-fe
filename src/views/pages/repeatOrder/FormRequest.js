@@ -18,9 +18,9 @@ import { Context } from "./ReapeatOrder";
 import { get_products } from "./RepeatOrderLink";
 
 const fields = [
-  { key: "ROProcod", label: "Procode" },
-  { key: "ROName", label: "product description" },
-  { key: "RONettPrice", label: "product HNA" },
+  { key: "ProdCode", label: "Procode" },
+  { key: "Name", label: "product description" },
+  { key: "NettPrice", label: "product HNA" },
 ];
 
 const FormRequest = () => {
@@ -34,14 +34,13 @@ const FormRequest = () => {
 
   const [procodeText, setProcodeText] = useState("");
   const [pronameText, setPronameText] = useState("");
+  const [QtyText, setQtyText] = useState("");
   const [orderQtyText, setOrderQtyText] = useState("");
-  const [qtyText, setQtyText] = useState("");
   const [remainText, setRemainText] = useState("");
-  const [orderHoldText, setOrdeHoldText] = useState("");
+  const [orderHoldText, setOrderHoldText] = useState("");
   const [orderUnitText, setOrderUnitText] = useState("");
   const [netPriceText, setNetPriceText] = useState("");
   const [netPriceTotalText, setNetPriceTotalText] = useState("");
-  const [stockText, setStockText] = useState("");
   const [orderLimitText, setOrderLimitText] = useState("");
   const [localPRoductText, setLocalPRoductText] = useState("");
   const [userUpdateText, setUserUpdateText] = useState("");
@@ -79,11 +78,11 @@ const FormRequest = () => {
 
   const selectListProduct = async (e) => {
     setModal(!modal);
-    await setProcodeText(e.ROProcod);
+    await setProcodeText(e.ProdCode);
     await ctxload.setLoading(true); 
     await axios({
       method: "get",
-      url: get_products + "/" + e.ROProcod,
+      url: get_products + "/" + e.ProdCode,
       responseType: "json",
     })
       .then((res) => {
@@ -91,67 +90,108 @@ const FormRequest = () => {
         if(res.error.status){
           alert(res.error.msg)
           return false;
+        } else {
+          ctx.dispacth.setRowData(res.data)
         }
-        ctx.dispacth.setRowData(res.data)
       })
       .catch((err) => {
         window.alert(err);
+        clearFormInput();
       });
 
     await ctxload.setLoading(false); 
   };
 
-
   const btnAddClick = () => {
-    ctx.dispacth.setRowData({});
-    clearFormInput();
-    setbtnEnabled(!btnEnabled);
-    setProcodeDisabled(!procodeDisabled);
-    setOrderQtyDisabled(!orderQtyDisabled);
+    if (ctx.state.rowsData.length === 0) { 
+      alert('select order number to be edited first !') 
+    } else {
+      ctx.dispacth.setRowData({});
+      setbtnEnabled(!btnEnabled);
+      setProcodeDisabled(!procodeDisabled);
+      setOrderQtyDisabled(!orderQtyDisabled);
+    }
   };
+
+  const btnEditClick = () => {
+    if (ctx.state.rowData.ReqProdCode === undefined || ctx.state.rowData.ReqProdCode === '') { 
+      alert('select product to be edited first !') 
+    } else {
+      setbtnEnabled(!btnEnabled);
+      setOrderQtyDisabled(false);
+    }
+  };
+
+  // const btnDeleteClick = () => {
+  //   if (ctx.state.rowsData.length === 0)     { 
+  //     alert('select the data to be deleted first !') 
+  //   }
+  //   else {
+
+  //   }
+  // };
 
   const btnCancelClick = () => {
     setbtnEnabled(!btnEnabled);
-    setProcodeDisabled(!procodeDisabled);
-    setOrderQtyDisabled(!orderQtyDisabled);
+    setProcodeDisabled(true);
+    setOrderQtyDisabled(true);
   };
+
+  const thousandMasking = (amount) => {
+    if (amount === '' || amount === undefined || amount === 0  || amount === '0' || amount === null) {
+      return amount;
+    } 
+    else {
+      return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  };
+
+  const checkRowData = () =>{
+    if(ctx.state.rowData.ReqProdCode === undefined){
+      clearFormInput();
+    }
+  }
 
   useEffect(() => {
     setFormInput();
+    checkRowData();
   });
 
   const setFormInput = () => {
-    setProcodeText(ctx.state.rowData.ReqProdCode);
-    setPronameText(ctx.state.rowData.ROName);
-    setOrderQtyText(ctx.state.rowData.Req_ROQty);
-    setQtyText(ctx.state.rowData.ReqQty);
-    setRemainText(ctx.state.rowData.Remain);
-    // setOrdeHoldText("");
-    // setOrderUnitText(ctx.state.rowData["Order Unit"]);
-    setNetPriceText(ctx.state.rowData.RONettPrice);
-    setNetPriceTotalText(ctx.state.rowData.ReqTotalNettPrice);
-    // setStockText("");
-    setOrderLimitText(ctx.state.rowData.ReqOrderLimit);
-    // setLocalPRoductText(ctx.state.rowData.Req_LocalProduct);
-    // setUserUpdateText(ctx.state.rowData.Req_UserID);
-    // setNoteORText("");
+    if(orderQtyDisabled){
+      setProcodeText(ctx.state.rowData.ReqProdCode);
+      setPronameText(ctx.state.rowData.ReqName);
+      setOrderQtyText(ctx.state.rowData.ReqQty);
+      setOrderUnitText(ctx.state.rowData.ReqSellPackName);
+      setQtyText(ctx.state.rowData.ReqQty);
+      setOrderHoldText(ctx.state.rowData.ReqHold);
+      setOrderLimitText(ctx.state.rowData.ReqOrderLimit);
+      setLocalPRoductText(ctx.state.rowData.ReqLocalProcod);
+      setRemainText(ctx.state.rowData.ReqRemain);
+      setNetPriceText(ctx.state.rowData.ReqNettPrice);
+      setNetPriceTotalText(ctx.state.rowData.ReqNettPriceTotal);
+      setUserUpdateText(ctx.state.rowData.ReqUserID);
+      setNoteORText(ctx.state.rowData.ReqKetOr);
+      // setUserUpdateText(ctx.state.rowData['ReqKetOr']);
+    }
   };
 
   const clearFormInput = () => {
-    setProcodeText("");
-    setPronameText("");
-    setOrderQtyText("");
-    setQtyText("");
-    setRemainText("");
-    setOrdeHoldText("");
-    setOrderUnitText("");
-    setNetPriceText("");
-    setNetPriceTotalText("");
-    setStockText("");
-    setOrderLimitText("");
-    setLocalPRoductText("");
-    setUserUpdateText("");
-    setNoteORText("");
+    if(orderQtyDisabled){
+      setProcodeText("");
+      setPronameText("");
+      setOrderQtyText("");
+      setOrderUnitText("");
+      setQtyText("");
+      setOrderHoldText("");
+      setOrderLimitText("");
+      setRemainText("");
+      setLocalPRoductText("");
+      setNetPriceText("");
+      setNetPriceTotalText("");
+      setUserUpdateText("");
+      setNoteORText("");
+    }
   };
 
   return (
@@ -173,7 +213,7 @@ const FormRequest = () => {
                       id="procode"
                       size="sm"
                       value={procodeText}
-                      onChange={(e) => setProcodeText(e.value)}
+                      onChange={(e) => setProcodeText(e.target.value)}
                       disabled={procodeDisabled}
                     />
                   </CCol>
@@ -203,13 +243,13 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.qtyOR}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="order-qty"
                       size="sm"
                       value={orderQtyText}
-                      onChange={(e) => setOrderQtyText(e.value)}
+                      onChange={(e) => setOrderQtyText(e.target.value)}
                       disabled={orderQtyDisabled}
                     />
                   </CCol>
@@ -218,7 +258,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.unitOR}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="order-unit"
@@ -234,12 +274,12 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.qty}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="quantity"
                       size="sm"
-                      value={qtyText}
+                      value={thousandMasking(QtyText)}
                       disabled
                     />
                   </CCol>
@@ -248,12 +288,12 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.holdOR}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="hold-order"
                       size="sm"
-                      value={orderHoldText}
+                      value={thousandMasking(orderHoldText)}
                       disabled
                     />
                   </CCol>
@@ -264,12 +304,12 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.limitOR}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="order-limit"
                       size="sm"
-                      value={orderLimitText}
+                      value={thousandMasking(orderLimitText)}
                       disabled
                     />
                   </CCol>
@@ -278,12 +318,12 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.sisa}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="remain"
                       size="sm"
-                      value={remainText}
+                      value={thousandMasking(remainText)}
                       disabled
                     />
                   </CCol>
@@ -294,7 +334,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.lclprod}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="local-product"
@@ -308,12 +348,16 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.price}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
+                      // data-inputmask="'alias': 'currency'"
+                      // thousandSeparator={true}
+                      // prefix="Rp" 
+                      // decimalScale={2}
                       id="net-price"
                       size="sm"
-                      value={netPriceText}
+                      value={thousandMasking(netPriceText)}
                       disabled
                     />
                   </CCol>
@@ -324,7 +368,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.usrupdate}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="user-update"
@@ -338,12 +382,12 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.pricetot}
                     </CLabel>
                   </CCol>
-                  <CCol md={3}>
+                  <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
                       id="net-price-total"
                       size="sm"
-                      value={netPriceTotalText}
+                      value={thousandMasking(netPriceTotalText)}
                       disabled
                     />
                   </CCol>
@@ -379,6 +423,7 @@ const FormRequest = () => {
                   color="light"
                   className="mb-2"
                   block
+                  onClick={btnEditClick}
                   disabled={btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].edit}
@@ -387,6 +432,7 @@ const FormRequest = () => {
                   color="light"
                   className="mb-2"
                   block
+                  //onClick={btnDeleteClick}
                   disabled={btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].del}

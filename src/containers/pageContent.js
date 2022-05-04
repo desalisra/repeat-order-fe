@@ -12,8 +12,9 @@ const pageContent = {
           tablocal: "LOKAL",
           tabelRO: {
             fieldprocod: "Produk",
+            fieldname: "Nama Produk",
             fieldqty: "Quantity",
-            fieldtglconfirm: "Confirm Date",
+            fieldtglconfirm: "Tgl Konfirmasi",
             fieldunitOR: "Satuan Pesanan",
             fieldqtyOR: "Qty Pesanan",
             fieldlimitOR: "Batas Pesanan",
@@ -57,6 +58,7 @@ const pageContent = {
           tablocal: "LOCAL",
           tabelRO: {
             fieldprocod: "Procode",
+            fieldname: "Product Name",
             fieldqty: "Quantity",
             fieldtglconfirm: "Confirm Date",
             fieldunitOR: "Order Unit",

@@ -7,16 +7,19 @@ import{
 } from "@coreui/react";
 import LanguageContext from "containers/languageContext";
 
-
-import {useReactToPrint} from 'react-to-print';
+import { Context } from "./ReapeatOrder";
+import { useReactToPrint }  from 'react-to-print';
 import ComponentToPrint from "./ComponentToPrint";
 
 const ButtonOption = () => {
+    let ctx = React.useContext(Context);
     let language = React.useContext(LanguageContext);
-    let componentRef = useRef();
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-    });
+
+    const componentRef = useRef();
+
+    const handlePrint = useReactToPrint(
+        {content: () => componentRef.current,},
+    ); 
 
     return(
         <CContainer fluid className="mb-2">
@@ -28,14 +31,13 @@ const ButtonOption = () => {
                     <CButton color="dark" className="mr-2">
                         {language.pageContent[language.pageLanguage].RO.konfirmasi}
                     </CButton>
-
-                    <CButton color="dark" onClick={handlePrint}>
-                        {language.pageContent[language.pageLanguage].print}
-                    </CButton>
-                    <div style={{ display: "none" }}> 
+                    
+                    <div style={{ display: "none" }}>
                         <ComponentToPrint ref={componentRef} />
                     </div>
-                    
+                    <CButton color="dark" onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : handlePrint ()}>
+                        {language.pageContent[language.pageLanguage].print}
+                    </CButton>
                 </CCol>
             </CRow>
         </CContainer>

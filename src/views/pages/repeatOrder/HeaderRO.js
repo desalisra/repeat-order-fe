@@ -33,9 +33,13 @@ const HeaderRo = () => {
   const [modal, setModal] = useState(false);
   const [listOrder, setListOrder] = useState([]);
 
+  const [orderStatus, setOrderStatus] = useState("");
+  const [confirmDate, setConfirmDate] = useState("");
+  const [confrimBy, setConfrimBy] = useState("");
+
   const showModal = async () => {   
     await ctxload.setLoading(true); 
-    let data = await axios({
+    await axios({
       method: "get",
       url: get_request,
       responseType: "json",
@@ -55,7 +59,7 @@ const HeaderRo = () => {
         return true;
       });       
 
-      ctxload.setLoading(false);
+    ctxload.setLoading(false);
   };
 
   const closeModal = () => {
@@ -65,11 +69,15 @@ const HeaderRo = () => {
   const selectListOrder = async (e) => {
     setModal(!modal);
     await setOrderNumbText(e.Number);
-    //console.log(e.Number);
     await getRequestOrder(e.Number);
   };
 
   const getRequestOrder = async (orderNum) => {
+    ctx.dispacth.setGrandTotal(0);
+    ctx.dispacth.setRowsData([]);
+    ctx.dispacth.setRowData({});
+    clearFormInput();
+    
     await ctxload.setLoading(true);
     await axios({
       method: "get",
@@ -80,18 +88,31 @@ const HeaderRo = () => {
         res = res.data;
         if(res.error.status){
           alert(res.error.msg)
-          return false;
         }
-        ctx.dispacth.setGrandTotal(res.data.TotalNettPrice); 
-        ctx.dispacth.setRowsData(res.data.ReqDetail); 
-        ctxload.setLoading(false);
-        return false;
+        else{
+          ctx.dispacth.setGrandTotal(res.data.TotalNettPrice); 
+          ctx.dispacth.setRowsData(res.data.ReqDetail);
+
+          let dataLocal = [];
+          res.data.ReqDetail.forEach((d) => {
+            if(d.ReqLocalProcod === "Y"){
+              dataLocal.push(d);
+            }
+          });
+          
+          ctx.dispacth.setRowsDataLocal(dataLocal);
+
+          const status = res.data.ConfirmYN === "Y" ? "Confirm" : "UnConfirm";
+          setOrderStatus(status);
+          setConfirmDate(res.data.Date);
+          setConfrimBy(res.data.ConfirmBy)
+        }
       })
       .catch((err) => {
         window.alert(err);
-        ctxload.setLoading(false);
-        return false;
       });
+    ctxload.setLoading(false);
+    return false;
   };
 
   const handlingKeyUp = async (e) => {
@@ -99,6 +120,23 @@ const HeaderRo = () => {
       e.preventDefault();
       await getRequestOrder(orderNumbText);
     }
+  };
+
+  const handlingBlur = async (e) => {
+    if (e !== "") { 
+      // e.preventDefault();
+      // await getRequestOrder(orderNumbText);
+      // handlingKeyUp(ENTER);
+      // ctx.dispacth.setGrandTotal(0);
+      // ctx.dispacth.setRowsData([]);    
+      //clearFormInput();
+    }
+  };
+
+  const clearFormInput = () => {
+    setOrderStatus("");
+    setConfirmDate("");
+    setConfrimBy("");
   };
 
   const profile = JSON.parse(localStorage.getItem("profile"));
@@ -161,7 +199,8 @@ const HeaderRo = () => {
                       id="order-numb"
                       value={orderNumbText}
                       onChange={(e) => setOrderNumbText(e.target.value)}
-                      onKeyUp={(e) => handlingKeyUp(e)}
+                      onKeyUp={(e) => handlingKeyUp(e)}                    
+                      onBlur={(e) => handlingBlur(e.target.value)}
                     />
                   </CCol>
                   <CCol className="pr-0">
@@ -181,6 +220,7 @@ const HeaderRo = () => {
                       id="order-status"
                       size="sm"
                       placeholder="un / confirmed"
+                      value={orderStatus}
                       disabled
                     />
                   </CCol>
@@ -193,6 +233,7 @@ const HeaderRo = () => {
                       id="confirm-date"
                       size="sm"
                       placeholder="dd MMM yyyy"
+                      value={confirmDate}
                       disabled
                     />
                   </CCol>
@@ -205,6 +246,7 @@ const HeaderRo = () => {
                       id="confirm-by"
                       size="sm"
                       placeholder="user ID - user name"
+                      value={confrimBy}
                       disabled
                     />
                   </CCol>

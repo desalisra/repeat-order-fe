@@ -13,6 +13,7 @@ const RepeatOrder = () => {
   const [orderNum, setOrderNum] = useState("");
   const [grandTotal, setGrandTotal] = useState("");
   const [rowsData, setRowsData] = useState([]);
+  const [rowsDataLocal, setRowsDataLocal] = useState([]);
   const [rowData, setRowData] = useState({});
 
   const state = {
@@ -20,6 +21,7 @@ const RepeatOrder = () => {
     grandTotal,
     rowsData,
     rowData,
+    rowsDataLocal,
   };  
 
   const dispacth = {
@@ -27,6 +29,7 @@ const RepeatOrder = () => {
     setGrandTotal,
     setRowsData,
     setRowData,
+    setRowsDataLocal,
   }; 
 
   // const dispacth = (action) => {

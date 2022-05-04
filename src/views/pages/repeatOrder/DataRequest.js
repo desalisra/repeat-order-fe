@@ -32,14 +32,19 @@ const DataRequest = () => {
 
   const fields = [
     { key: "ReqProdCode", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprocod },
+    { key: "ReqName", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldname },
     { key: "ReqQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqty },
-    { key: "Req_RecQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldunitOR },
-    { key: "Req_ROQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqtyOR },
+    { key: "ReqSellPackName", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldunitOR, _style: { width: '100px' } },
+    { key: "ReqOrderUnit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqtyOR },
     { key: "ReqOrderLimit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldlimitOR },
-    { key: "Remain", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldsisa },
-    { key: "RONettPrice", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprice },
-    { key: "ReqTotalNettPrice", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldpricetot },
+    { key: "ReqRemain", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldsisa },
+    { key: "ReqNettPrice", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprice, _style: { textAlign:'right' } },
+    { key: "ReqNettPriceTotal", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldpricetot },
   ];
+
+  const numberFormat = (amount) => {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   return (
     <CContainer fluid>
@@ -74,8 +79,26 @@ const DataRequest = () => {
                 <DataTable
                   items={ctx.state.rowsData}
                   fields={fields}
+                  scopedSlots={{
+                    'ReqQty': (item)=>(
+                      <td>{numberFormat(item.ReqQty)}</td>
+                    ),
+                    'ReqOrderLimit': (item)=>(
+                      <td>{numberFormat(item.ReqOrderLimit)}</td>
+                    ),
+                    'ReqRemain': (item)=>(
+                      <td>{numberFormat(item.ReqRemain)}</td>
+                    ),
+                    'ReqNettPrice': (item)=>(
+                      <td>{numberFormat(item.ReqNettPrice)}</td>
+                    ),
+                    'ReqNettPriceTotal': (item)=>(
+                      <td>{numberFormat(item.ReqNettPriceTotal)}</td>
+                    ),
+                  }}
                   getRowData={(e) => getRowData(e)}
-                />
+                />              
+
                 <CRow className="d-flex justify-content-end">
                   <CCol md={6}>
                     <CRow className="d-flex justify-content-end">
@@ -103,8 +126,25 @@ const DataRequest = () => {
                 visible={activeKey === 2}
               >
                 <DataTable
-                  items=""
+                  items={ctx.state.rowsDataLocal}
                   fields={fields}
+                  scopedSlots={{
+                    'ReqQty': (item)=>(
+                      <td>{numberFormat(item.ReqQty)}</td>
+                    ),
+                    'ReqOrderLimit': (item)=>(
+                      <td>{numberFormat(item.ReqOrderLimit)}</td>
+                    ),
+                    'ReqRemain': (item)=>(
+                      <td>{numberFormat(item.ReqRemain)}</td>
+                    ),
+                    'ReqNettPrice': (item)=>(
+                      <td>{numberFormat(item.ReqNettPrice)}</td>
+                    ),
+                    'ReqNettPriceTotal': (item)=>(
+                      <td>{numberFormat(item.ReqNettPriceTotal)}</td>
+                    ),
+                  }}
                   getRowData=""
                 />
                 <CRow className="d-flex justify-content-end">
