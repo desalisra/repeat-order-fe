@@ -16,6 +16,7 @@ import LanguageContext from "containers/languageContext";
 import { ContextLoad } from "containers/TheLayout";
 import { Context } from "./RepeatOrder";
 import { get_products } from "./RepeatOrderLink";
+import { glbNumberFormat } from "reusable/Helper";
 
 const fields = [
   { key: "ProdCode", label: "Procode" },
@@ -122,29 +123,20 @@ const FormRequest = () => {
     }
   };
 
-  // const btnDeleteClick = () => {
-  //   if (ctx.state.rowsData.length === 0)     { 
-  //     alert('select the data to be deleted first !') 
-  //   }
-  //   else {
-
-  //   }
-  // };
+  const btnDeleteClick = () => {
+    if (ctx.state.rowData.ReqProdCode === undefined || ctx.state.rowData.ReqProdCode === '')     { 
+      alert('select the data to be deleted first !') 
+    }
+    else {
+      // alert(`Product has been deleted ! ${procodeText}`) 
+      alert("Product " + procodeText + "-" + pronameText + " has been deleted ! ") 
+    }
+  };
 
   const btnCancelClick = () => {
     setbtnEnabled(!btnEnabled);
     setProcodeDisabled(true);
     setOrderQtyDisabled(true);
-  };
-
-  // thousandMasking hanya bagus untuk show, kalau untuk dipakai ketika input, tidak sesuai tampilannya
-  const thousandMasking = (amount) => {
-    if (amount === '' || amount === undefined || amount === 0  || amount === '0' || amount === null) {
-      return amount;
-    } 
-    else {
-      return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   };
 
   const checkRowData = () =>{
@@ -280,7 +272,7 @@ const FormRequest = () => {
                       type="text"
                       id="quantity"
                       size="sm"
-                      value={thousandMasking(QtyText)}
+                      value={glbNumberFormat(QtyText)}
                       disabled
                     />
                   </CCol>
@@ -294,7 +286,7 @@ const FormRequest = () => {
                       type="text"
                       id="hold-order"
                       size="sm"
-                      value={thousandMasking(orderHoldText)}
+                      value={glbNumberFormat(orderHoldText)}
                       disabled
                     />
                   </CCol>
@@ -310,7 +302,7 @@ const FormRequest = () => {
                       type="text"
                       id="order-limit"
                       size="sm"
-                      value={thousandMasking(orderLimitText)}
+                      value={glbNumberFormat(orderLimitText)}
                       disabled
                     />
                   </CCol>
@@ -324,7 +316,7 @@ const FormRequest = () => {
                       type="text"
                       id="remain"
                       size="sm"
-                      value={thousandMasking(remainText)}
+                      value={glbNumberFormat(remainText)}
                       disabled
                     />
                   </CCol>
@@ -358,7 +350,7 @@ const FormRequest = () => {
                       // decimalScale={2}
                       id="net-price"
                       size="sm"
-                      value={thousandMasking(netPriceText)}
+                      value={glbNumberFormat(netPriceText)}
                       disabled
                     />
                   </CCol>
@@ -388,7 +380,7 @@ const FormRequest = () => {
                       type="text"
                       id="net-price-total"
                       size="sm"
-                      value={thousandMasking(netPriceTotalText)}
+                      value={glbNumberFormat(netPriceTotalText)}
                       disabled
                     />
                   </CCol>
@@ -433,7 +425,7 @@ const FormRequest = () => {
                   color="light"
                   className="mb-2"
                   block
-                  //onClick={btnDeleteClick}
+                  onClick={btnDeleteClick}
                   disabled={btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].del}

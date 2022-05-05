@@ -1,21 +1,6 @@
 import React from "react";
 import { Context } from "./RepeatOrder";
-
-const formatDate = (e) => {
-  let monthNames =["Jan","Feb","Mar","Apr",
-                   "May","Jun","Jul","Aug",
-                   "Sep", "Oct","Nov","Dec"];
-  
-  let day = e.getDate();
-
-  let monthIndex = e.getMonth();
-  let monthName = monthNames[monthIndex];
-  
-  let year = e.getFullYear(); 
-
-  let newDate = `${day}-${monthName}-${year}`;  
-  return newDate;
-};
+import { glbFormatDate } from "reusable/Helper";
 
 const ComponentToPrint = React.forwardRef((props, ref) => {
   // var indents = [];
@@ -26,7 +11,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
   let ctx = React.useContext(Context); 
 
   const profile = JSON.parse(localStorage.getItem("profile"));
-  let date = formatDate(new Date());
+  let date = glbFormatDate(new Date());
 
   return (
     <div ref={ref} className="mx-2 my-2">

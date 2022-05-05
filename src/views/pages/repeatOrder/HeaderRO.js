@@ -15,6 +15,7 @@ import LanguageContext from "containers/languageContext";
 import { Context } from "./RepeatOrder";
 import { ContextLoad } from "containers/TheLayout";
 import { get_request } from "./RepeatOrderLink";
+import { glbFormatDate } from "reusable/Helper";
 
 const fields = [
   { key: "Number", label: "Order number" },
@@ -233,7 +234,7 @@ const HeaderRo = () => {
                       id="confirm-date"
                       size="sm"
                       placeholder="dd MMM yyyy"
-                      value={confirmDate}
+                      value={confirmDate === "" ? "" : glbFormatDate(confirmDate)}
                       disabled
                     />
                   </CCol>
