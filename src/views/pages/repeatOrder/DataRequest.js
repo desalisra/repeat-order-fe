@@ -18,7 +18,7 @@ import {
 import DataTable from "reusable/DataTable";
 import LanguageContext from "containers/languageContext";
 
-import { Context } from "./ReapeatOrder";
+import { Context } from "./RepeatOrder";
 
 
 const DataRequest = () => {

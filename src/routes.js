@@ -2,7 +2,7 @@ import React from "react";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const RepeatOrder = React.lazy(() =>
-  import("./views/pages/repeatOrder/ReapeatOrder")
+  import("./views/pages/repeatOrder/RepeatOrder")
 );
 const ComponentToPrint = React.lazy(() =>
   import("./views/pages/repeatOrder/ComponentToPrint")

@@ -12,7 +12,7 @@ import {
 } from "@coreui/react";
 import ListModal from "reusable/ListModal";
 import LanguageContext from "containers/languageContext";
-import { Context } from "./ReapeatOrder";
+import { Context } from "./RepeatOrder";
 import { ContextLoad } from "containers/TheLayout";
 import { get_request } from "./RepeatOrderLink";
 

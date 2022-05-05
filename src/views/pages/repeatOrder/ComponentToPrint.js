@@ -1,18 +1,18 @@
 import React from "react";
-import { Context } from "./ReapeatOrder";
+import { Context } from "./RepeatOrder";
 
-const formatDate = () => {
-  const date = new Date();
+const formatDate = (e) => {
   let monthNames =["Jan","Feb","Mar","Apr",
                    "May","Jun","Jul","Aug",
                    "Sep", "Oct","Nov","Dec"];
   
-  let day = date.getDate();
+  let day = e.getDate();
 
-  let monthIndex = date.getMonth();
+  let monthIndex = e.getMonth();
   let monthName = monthNames[monthIndex];
   
-  let year = date.getFullYear(); 
+  let year = e.getFullYear(); 
+
   let newDate = `${day}-${monthName}-${year}`;  
   return newDate;
 };
@@ -26,7 +26,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
   let ctx = React.useContext(Context); 
 
   const profile = JSON.parse(localStorage.getItem("profile"));
-  let date = formatDate();
+  let date = formatDate(new Date());
 
   return (
     <div ref={ref} className="mx-2 my-2">

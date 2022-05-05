@@ -14,7 +14,7 @@ import ListModal from "reusable/ListModal";
 
 import LanguageContext from "containers/languageContext";
 import { ContextLoad } from "containers/TheLayout";
-import { Context } from "./ReapeatOrder";
+import { Context } from "./RepeatOrder";
 import { get_products } from "./RepeatOrderLink";
 
 const fields = [
@@ -137,6 +137,7 @@ const FormRequest = () => {
     setOrderQtyDisabled(true);
   };
 
+  // thousandMasking hanya bagus untuk show, kalau untuk dipakai ketika input, tidak sesuai tampilannya
   const thousandMasking = (amount) => {
     if (amount === '' || amount === undefined || amount === 0  || amount === '0' || amount === null) {
       return amount;

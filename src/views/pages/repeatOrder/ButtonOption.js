@@ -7,7 +7,7 @@ import{
 } from "@coreui/react";
 import LanguageContext from "containers/languageContext";
 
-import { Context } from "./ReapeatOrder";
+import { Context } from "./RepeatOrder";
 import { useReactToPrint }  from 'react-to-print';
 import ComponentToPrint from "./ComponentToPrint";
 
