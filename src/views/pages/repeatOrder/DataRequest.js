@@ -80,6 +80,9 @@ const DataRequest = () => {
                     'ReqQty': (item)=>(
                       <td align="right">{glbNumberFormat(item.ReqQty)}</td>
                     ),
+                    'ReqOrderUnit': (item)=>(
+                      <td align="right">{glbNumberFormat(item.ReqOrderUnit)}</td>
+                    ),
                     'ReqOrderLimit': (item)=>(
                       <td align="right">{glbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
@@ -127,7 +130,10 @@ const DataRequest = () => {
                   fields={fields}
                   scopedSlots={{
                     'ReqQty': (item)=>(
-                      <td>{glbNumberFormat(item.ReqQty)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqQty)}</td>
+                    ),
+                    'ReqOrderUnit': (item)=>(
+                      <td align="right">{glbNumberFormat(item.ReqOrderUnit)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
                       <td align="right">{glbNumberFormat(item.ReqOrderLimit)}</td>
