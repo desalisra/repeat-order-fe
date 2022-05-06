@@ -78,19 +78,19 @@ const DataRequest = () => {
                   fields={fields}
                   scopedSlots={{
                     'ReqQty': (item)=>(
-                      <td>{glbNumberFormat(item.ReqQty)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqQty)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
-                      <td>{glbNumberFormat(item.ReqOrderLimit)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
                     'ReqRemain': (item)=>(
-                      <td>{glbNumberFormat(item.ReqRemain)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqRemain)}</td>
                     ),
                     'ReqNettPrice': (item)=>(
                       <td align="right">{glbNumberFormat(item.ReqNettPrice)}</td>
                     ),
                     'ReqNettPriceTotal': (item)=>(
-                      <td>{glbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqNettPriceTotal)}</td>
                     ),
                   }}
                   getRowData={(e) => getRowData(e)}
@@ -130,16 +130,16 @@ const DataRequest = () => {
                       <td>{glbNumberFormat(item.ReqQty)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
-                      <td>{glbNumberFormat(item.ReqOrderLimit)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
                     'ReqRemain': (item)=>(
-                      <td>{glbNumberFormat(item.ReqRemain)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqRemain)}</td>
                     ),
                     'ReqNettPrice': (item)=>(
-                      <td>{glbNumberFormat(item.ReqNettPrice)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqNettPrice)}</td>
                     ),
                     'ReqNettPriceTotal': (item)=>(
-                      <td>{glbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      <td align="right">{glbNumberFormat(item.ReqNettPriceTotal)}</td>
                     ),
                   }}
                   getRowData={(e) => getRowData(e)}

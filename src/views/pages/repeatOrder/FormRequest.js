@@ -31,7 +31,6 @@ const FormRequest = () => {
 
   const [procodeDisabled, setProcodeDisabled] = useState(true);
   const [orderQtyDisabled, setOrderQtyDisabled] = useState(true);
-  const [btnEnabled, setbtnEnabled] = useState(false);
 
   const [procodeText, setProcodeText] = useState("");
   const [pronameText, setPronameText] = useState("");
@@ -103,12 +102,12 @@ const FormRequest = () => {
     await ctxload.setLoading(false); 
   };
 
-  const btnAddClick = () => {
+  const btnAddClick = async () => {
     if (ctx.state.rowsData.length === 0) { 
       alert('select order number to be edited first !') 
     } else {
-      ctx.dispacth.setRowData({});
-      setbtnEnabled(!btnEnabled);
+      await ctx.dispacth.setRowData({});
+      ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
       setProcodeDisabled(!procodeDisabled);
       setOrderQtyDisabled(!orderQtyDisabled);
     }
@@ -118,7 +117,7 @@ const FormRequest = () => {
     if (ctx.state.rowData.ReqProdCode === undefined || ctx.state.rowData.ReqProdCode === '') { 
       alert('select product to be edited first !') 
     } else {
-      setbtnEnabled(!btnEnabled);
+      ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
       setOrderQtyDisabled(false);
     }
   };
@@ -134,7 +133,7 @@ const FormRequest = () => {
   };
 
   const btnCancelClick = () => {
-    setbtnEnabled(!btnEnabled);
+    ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
     setProcodeDisabled(true);
     setOrderQtyDisabled(true);
   };
@@ -224,7 +223,7 @@ const FormRequest = () => {
                       size="sm"
                       block
                       onClick={showModal}
-                      disabled={!btnEnabled}
+                      disabled={!ctx.state.btnEnabled}
                     >
                       ...
                     </CButton>
@@ -238,7 +237,7 @@ const FormRequest = () => {
                   </CCol>
                   <CCol className="pr-1" md={2}>
                     <CInput
-                      type="text"
+                      type="number"
                       id="order-qty"
                       size="sm"
                       value={orderQtyText}
@@ -408,7 +407,7 @@ const FormRequest = () => {
                   className="mb-2"
                   block
                   onClick={btnAddClick}
-                  disabled={btnEnabled}
+                  disabled={ctx.state.btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].add}
                 </CButton>
@@ -417,7 +416,7 @@ const FormRequest = () => {
                   className="mb-2"
                   block
                   onClick={btnEditClick}
-                  disabled={btnEnabled}
+                  disabled={ctx.state.btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].edit}
                 </CButton>
@@ -426,7 +425,7 @@ const FormRequest = () => {
                   className="mb-2"
                   block
                   onClick={btnDeleteClick}
-                  disabled={btnEnabled}
+                  disabled={ctx.state.btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].del}
                 </CButton>
@@ -434,7 +433,7 @@ const FormRequest = () => {
                   color="light"
                   className="mb-2"
                   block
-                  disabled={!btnEnabled}
+                  disabled={!ctx.state.btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].save}
                 </CButton>
@@ -442,7 +441,7 @@ const FormRequest = () => {
                   color="light"
                   className="mb-2"
                   block
-                  disabled={!btnEnabled}
+                  disabled={!ctx.state.btnEnabled}
                   onClick={btnCancelClick}
                 >
                   {language.pageContent[language.pageLanguage].cancel}

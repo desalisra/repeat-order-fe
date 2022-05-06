@@ -33,6 +33,7 @@ const HeaderRo = () => {
   const [orderNumbText, setOrderNumbText] = useState("");
   const [modal, setModal] = useState(false);
   const [listOrder, setListOrder] = useState([]);
+  const [IsBlur, setIsBlur] = useState(false);
 
   const [orderStatus, setOrderStatus] = useState("");
   const [confirmDate, setConfirmDate] = useState("");
@@ -116,21 +117,24 @@ const HeaderRo = () => {
     return false;
   };
 
-  const handlingKeyUp = async (e) => {
+  const handlingOnChange = async (e) => {    
+    setIsBlur(true);
+    setOrderNumbText(e);  
+  };
+  const handlingKeyUp = async (e) => {    
     if (e.keyCode === 13) {
       e.preventDefault();
-      await getRequestOrder(orderNumbText);
-    }
+      await getRequestOrder(orderNumbText);    
+      setIsBlur(false);
+    }    
   };
-
   const handlingBlur = async (e) => {
-    if (e !== "") { 
-      // e.preventDefault();
-      // await getRequestOrder(orderNumbText);
-      // handlingKeyUp(ENTER);
-      // ctx.dispacth.setGrandTotal(0);
-      // ctx.dispacth.setRowsData([]);    
-      //clearFormInput();
+    if (orderNumbText !== '' && IsBlur === true) {
+      ctx.dispacth.setGrandTotal(0);
+      ctx.dispacth.setRowsData([]);    
+      clearFormInput();
+      await getRequestOrder(orderNumbText);
+      setIsBlur(false);
     }
   };
 
@@ -199,13 +203,17 @@ const HeaderRo = () => {
                       type="text"
                       id="order-numb"
                       value={orderNumbText}
-                      onChange={(e) => setOrderNumbText(e.target.value)}
+                      onChange={(e) => handlingOnChange(e.target.value)}
                       onKeyUp={(e) => handlingKeyUp(e)}                    
-                      onBlur={(e) => handlingBlur(e.target.value)}
+                      onBlur={(e) => handlingBlur(e)}
+                      disabled={ctx.state.btnEnabled}
                     />
                   </CCol>
                   <CCol className="pr-0">
-                    <CButton color="light" onClick={showModal}>
+                    <CButton 
+                      color="light" 
+                      onClick={showModal}
+                      disabled={ctx.state.btnEnabled}>
                       ...
                     </CButton>
                   </CCol>

@@ -15,6 +15,7 @@ const RepeatOrder = () => {
   const [rowsData, setRowsData] = useState([]);
   const [rowsDataLocal, setRowsDataLocal] = useState([]);
   const [rowData, setRowData] = useState({});
+  const [btnEnabled, setbtnEnabled] = useState(false);
 
   const state = {
     orderNum,
@@ -22,6 +23,7 @@ const RepeatOrder = () => {
     rowsData,
     rowData,
     rowsDataLocal,
+    btnEnabled,
   };  
 
   const dispacth = {
@@ -30,6 +32,7 @@ const RepeatOrder = () => {
     setRowsData,
     setRowData,
     setRowsDataLocal,
+    setbtnEnabled,
   }; 
 
   // const dispacth = (action) => {

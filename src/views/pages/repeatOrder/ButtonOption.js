@@ -25,17 +25,24 @@ const ButtonOption = () => {
         <CContainer fluid className="mb-2">
             <CRow className="justify-content-end">
                 <CCol sm={5} className="d-flex justify-content-end">
-                    <CButton color="dark" className="mr-2">
+                    <CButton color="dark" 
+                             className="mr-2"
+                             disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].RO.request}
                     </CButton>
-                    <CButton color="dark" className="mr-2">
+                    <CButton color="dark" 
+                             className="mr-2"
+                             onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : alert('data confirmed')}
+                             disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].RO.konfirmasi}
                     </CButton>
                     
                     <div style={{ display: "none" }}>
                         <ComponentToPrint ref={componentRef} />
                     </div>
-                    <CButton color="dark" onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : handlePrint ()}>
+                    <CButton color="dark" 
+                             onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : handlePrint ()}
+                             disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].print}
                     </CButton>
                 </CCol>
