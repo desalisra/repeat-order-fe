@@ -130,11 +130,15 @@ const FormRequest = () => {
 
   const btnEditClick = () => {
     if (ctx.state.orderStatus !== "Y") {
-      if (ctx.state.rowData.ReqProdCode === undefined || ctx.state.rowData.ReqProdCode === '') { 
-        alert('select product to be edited first !') 
+      if (ctx.state.rowsData.length === 0) { 
+        alert('select order number to be edited first !') 
       } else {
-        ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
-        setOrderQtyDisabled(false);
+        if (ctx.state.rowData.ReqProdCode === undefined || ctx.state.rowData.ReqProdCode === '') { 
+          alert('select product to be edited first !') 
+        } else {
+          ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
+          setOrderQtyDisabled(false);
+        }
       }
     }
     else {

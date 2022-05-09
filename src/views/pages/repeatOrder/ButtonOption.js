@@ -8,7 +8,7 @@ import{
 import LanguageContext from "containers/languageContext";
 
 import { Context } from "./RepeatOrder";
-import { useReactToPrint }  from 'react-to-print';
+import { useReactToPrint } from 'react-to-print';
 import ComponentToPrint from "./ComponentToPrint";
 
 const ButtonOption = () => {
@@ -16,6 +16,20 @@ const ButtonOption = () => {
     let language = React.useContext(LanguageContext);
 
     const componentRef = useRef();
+
+    const handleConfirm = async (e) => {    
+        if (ctx.state.rowsData.length === 0 ) {
+            alert('data not found')
+        } else {
+            if (ctx.state.orderStatus === 'Y') {
+                alert("Order No : " + ctx.state.orderNum + ", has been confirmed")
+            } else {
+                // sintak for confirm here
+                // await ctx.dispatch.setOrderStatus('Y');
+                alert('confirm success')
+            }
+        }
+    };
 
     const handlePrint = useReactToPrint(
         {content: () => componentRef.current,},
@@ -32,7 +46,8 @@ const ButtonOption = () => {
                     </CButton>
                     <CButton color="dark" 
                              className="mr-2"
-                             onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : alert('data confirmed')}
+                             //onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : alert('data has been confirmed')}
+                             onClick={ () => handleConfirm(ctx.state.orderNum) }
                              disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].RO.konfirmasi}
                     </CButton>
@@ -41,7 +56,7 @@ const ButtonOption = () => {
                         <ComponentToPrint ref={componentRef} />
                     </div>
                     <CButton color="dark" 
-                             onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : handlePrint ()}
+                             onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : (ctx.state.orderStatus !== "Y" ? alert("Order No : " + ctx.state.orderNum + ", UnConfirm") :handlePrint ())}
                              disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].print}
                     </CButton>
