@@ -11,6 +11,7 @@ const Provider = Context.Provider;
 
 const RepeatOrder = () => {
   const [orderNum, setOrderNum] = useState("");
+  const [orderStatus, setOrderStatus] = useState("");
   const [grandTotal, setGrandTotal] = useState("");
   const [rowsData, setRowsData] = useState([]);
   const [rowsDataLocal, setRowsDataLocal] = useState([]);
@@ -19,6 +20,7 @@ const RepeatOrder = () => {
 
   const state = {
     orderNum,
+    orderStatus,
     grandTotal,
     rowsData,
     rowData,
@@ -28,6 +30,7 @@ const RepeatOrder = () => {
 
   const dispacth = {
     setOrderNum,
+    setOrderStatus,
     setGrandTotal,
     setRowsData,
     setRowData,

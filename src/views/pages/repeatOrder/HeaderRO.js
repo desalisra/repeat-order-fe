@@ -30,12 +30,10 @@ const HeaderRo = () => {
   let ctx = React.useContext(Context);
   let ctxload = React.useContext(ContextLoad);
 
-  const [orderNumbText, setOrderNumbText] = useState("");
   const [modal, setModal] = useState(false);
   const [listOrder, setListOrder] = useState([]);
   const [IsBlur, setIsBlur] = useState(false);
 
-  const [orderStatus, setOrderStatus] = useState("");
   const [confirmDate, setConfirmDate] = useState("");
   const [confrimBy, setConfrimBy] = useState("");
 
@@ -70,11 +68,12 @@ const HeaderRo = () => {
   
   const selectListOrder = async (e) => {
     setModal(!modal);
-    await setOrderNumbText(e.Number);
     await getRequestOrder(e.Number);
   };
 
   const getRequestOrder = async (orderNum) => {
+    ctx.dispacth.setOrderNum("");
+    ctx.dispacth.setOrderStatus("");
     ctx.dispacth.setGrandTotal(0);
     ctx.dispacth.setRowsData([]);
     ctx.dispacth.setRowData({});
@@ -92,6 +91,8 @@ const HeaderRo = () => {
           alert(res.error.msg)
         }
         else{
+          ctx.dispacth.setOrderNum(res.data.Number);
+          ctx.dispacth.setOrderStatus(res.data.ConfirmYN);
           ctx.dispacth.setGrandTotal(res.data.TotalNettPrice); 
           ctx.dispacth.setRowsData(res.data.ReqDetail);
 
@@ -101,11 +102,9 @@ const HeaderRo = () => {
               dataLocal.push(d);
             }
           });
-          
-          ctx.dispacth.setRowsDataLocal(dataLocal);
 
-          const status = res.data.ConfirmYN === "Y" ? "Confirm" : "UnConfirm";
-          setOrderStatus(status);
+          //const status = res.data.ConfirmYN === "Y" ? "Confirm" : "UnConfirm";
+          ctx.dispacth.setRowsDataLocal(dataLocal);
           setConfirmDate(res.data.Date);
           setConfrimBy(res.data.ConfirmBy)
         }
@@ -119,27 +118,26 @@ const HeaderRo = () => {
 
   const handlingOnChange = async (e) => {    
     setIsBlur(true);
-    setOrderNumbText(e);  
+    ctx.dispacth.setOrderNum(e);
   };
   const handlingKeyUp = async (e) => {    
     if (e.keyCode === 13) {
       e.preventDefault();
-      await getRequestOrder(orderNumbText);    
+      await getRequestOrder(ctx.state.orderNum);    
       setIsBlur(false);
     }    
   };
   const handlingBlur = async (e) => {
-    if (orderNumbText !== '' && IsBlur === true) {
+    if (ctx.state.orderNum !== '' && IsBlur === true) {
       ctx.dispacth.setGrandTotal(0);
       ctx.dispacth.setRowsData([]);    
       clearFormInput();
-      await getRequestOrder(orderNumbText);
+      await getRequestOrder(ctx.state.orderNum);
       setIsBlur(false);
     }
   };
 
   const clearFormInput = () => {
-    setOrderStatus("");
     setConfirmDate("");
     setConfrimBy("");
   };
@@ -202,7 +200,7 @@ const HeaderRo = () => {
                     <CInput
                       type="text"
                       id="order-numb"
-                      value={orderNumbText}
+                      value={ctx.state.orderNum}
                       onChange={(e) => handlingOnChange(e.target.value)}
                       onKeyUp={(e) => handlingKeyUp(e)}                    
                       onBlur={(e) => handlingBlur(e)}
@@ -229,7 +227,7 @@ const HeaderRo = () => {
                       id="order-status"
                       size="sm"
                       placeholder="un / confirmed"
-                      value={orderStatus}
+                      value={ctx.state.orderStatus === "Y" ? "Confirm" : "UnConfirm"}
                       disabled
                     />
                   </CCol>
