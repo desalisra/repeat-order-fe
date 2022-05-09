@@ -53,6 +53,7 @@ const DataRequest = () => {
                 <CNavLink
                   active={activeKey === 1}
                   onClick={() => setActiveKey(1)}
+                  disabled={ctx.state.btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].RO.taball}
                 </CNavLink>
@@ -61,6 +62,7 @@ const DataRequest = () => {
                 <CNavLink
                   active={activeKey === 2}
                   onClick={() => setActiveKey(2)}
+                  disabled={ctx.state.btnEnabled}
                 >
                   {language.pageContent[language.pageLanguage].RO.tablocal}
                 </CNavLink>

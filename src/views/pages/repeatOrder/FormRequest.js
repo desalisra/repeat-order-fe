@@ -48,6 +48,8 @@ const FormRequest = () => {
 
   const [modal, setModal] = useState(false);
   const [listProduct, setListProduct] = useState([]);
+  const [IsBlur, setIsBlur] = useState(false);
+  const [IsAdd, setIsAdd] = useState(false);
 
   const showModal = async () => {
     await ctxload.setLoading(true); 
@@ -76,13 +78,20 @@ const FormRequest = () => {
     setModal(!modal);
   };
 
-  const selectListProduct = async (e) => {
+  const selectListProduct = (e) => {
     setModal(!modal);
-    await setProcodeText(e.ProdCode);
+    setProcodeText(e.ProdCode);
+    getProduct(e.ProdCode);
+  };
+
+  const getProduct = async (e) => {
+    ctx.dispacth.setRowData({});
+    setProcodeText(e);
+    setPronameText('');
     await ctxload.setLoading(true); 
     await axios({
       method: "get",
-      url: get_products + "/" + e.ProdCode,
+      url: get_products + "/" + e,
       responseType: "json",
     })
       .then((res) => {
@@ -91,14 +100,14 @@ const FormRequest = () => {
           alert(res.error.msg)
           return false;
         } else {
-          ctx.dispacth.setRowData(res.data)
+          ctx.dispacth.setRowData(res.data);
+          setPronameText(res.data.ReqName);
         }
       })
       .catch((err) => {
         window.alert(err);
         clearFormInput();
       });
-
     await ctxload.setLoading(false); 
   };
 
@@ -108,6 +117,7 @@ const FormRequest = () => {
     } else {
       await ctx.dispacth.setRowData({});
       ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
+      setIsAdd(true);
       setProcodeDisabled(!procodeDisabled);
       setOrderQtyDisabled(!orderQtyDisabled);
     }
@@ -133,6 +143,12 @@ const FormRequest = () => {
   };
 
   const btnCancelClick = () => {
+    if (IsAdd === true) {
+      setIsAdd(false);
+      ctx.dispacth.setRowData({});
+      setProcodeText('');
+      setPronameText('');
+    }
     ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
     setProcodeDisabled(true);
     setOrderQtyDisabled(true);
@@ -143,6 +159,25 @@ const FormRequest = () => {
       clearFormInput();
     }
   }
+
+  const handlingOnChange = async (e) => {    
+    setIsBlur(true);
+    setProcodeText(e);
+  };
+  const handlingKeyUp = async (e) => {    
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      await getProduct(procodeText);
+      setIsBlur(false);
+    }    
+  };
+  const handlingBlur = async (e) => {
+    if (procodeText !== '' && IsBlur === true) {  
+      clearFormInput();
+      await getProduct(procodeText);
+      setIsBlur(false);
+    }
+  };
 
   useEffect(() => {
     setFormInput();
@@ -205,7 +240,9 @@ const FormRequest = () => {
                       id="procode"
                       size="sm"
                       value={procodeText}
-                      onChange={(e) => setProcodeText(e.target.value)}
+                      onChange={(e) => handlingOnChange(e.target.value)}
+                      onKeyUp={(e) => handlingKeyUp(e)}                    
+                      onBlur={(e) => handlingBlur(e)}
                       disabled={procodeDisabled}
                     />
                   </CCol>
