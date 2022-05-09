@@ -72,7 +72,7 @@ const HeaderRo = () => {
   };
 
   const getRequestOrder = async (orderNum) => {
-    ctx.dispacth.setOrderNum("");
+    ctx.dispacth.setOrderNum(orderNum);
     ctx.dispacth.setOrderStatus("");
     ctx.dispacth.setGrandTotal(0);
     ctx.dispacth.setRowsData([]);
