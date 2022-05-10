@@ -31,6 +31,18 @@ const ButtonOption = () => {
         }
     };
 
+    const handlePrintOnClick = async (e) => {  
+        if (ctx.state.rowsData.length === 0) {
+            alert('data not found')
+        } else {
+            if (ctx.state.orderStatus !== "Y") {
+                alert("Order No : " + ctx.state.orderNum + ", UnConfirm")
+            } else {
+                // code for additional condition here
+                handlePrint()
+            }
+        }
+    }
     const handlePrint = useReactToPrint(
         {content: () => componentRef.current,},
     ); 
@@ -56,7 +68,8 @@ const ButtonOption = () => {
                         <ComponentToPrint ref={componentRef} />
                     </div>
                     <CButton color="dark" 
-                             onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : (ctx.state.orderStatus !== "Y" ? alert("Order No : " + ctx.state.orderNum + ", UnConfirm") :handlePrint ())}
+                             //onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : (ctx.state.orderStatus !== "Y" ? alert("Order No : " + ctx.state.orderNum + ", UnConfirm") :handlePrint ())}
+                             onClick={ () => handlePrintOnClick(ctx.state.orderNum) }
                              disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].print}
                     </CButton>
