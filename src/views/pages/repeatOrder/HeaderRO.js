@@ -20,7 +20,7 @@ import { GlbFormatDate } from "reusable/Helper";
 const fields = [
   { key: "Number", label: "Order number" },
   { key: "ConfirmYN", label: "Order status" },
-  { key: "Date", label: "Confirm Date" },
+  { key: "ConfirmDate", label: "Confirm Date" },
   { key: "ConfirmBy", label: "Confirm By" },
   { key: "TotalNettPrice", label: "Grand Total" },
 ];
@@ -105,7 +105,7 @@ const HeaderRo = () => {
 
           //const status = res.data.ConfirmYN === "Y" ? "Confirm" : "UnConfirm";
           ctx.dispacth.setRowsDataLocal(dataLocal);
-          setConfirmDate(res.data.Date);
+          setConfirmDate(res.data.ConfirmDate);
           setConfrimBy(res.data.ConfirmBy)
         }
       })

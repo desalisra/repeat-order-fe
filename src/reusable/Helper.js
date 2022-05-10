@@ -18,12 +18,9 @@ export const GlbFormatDate = (e) => {
     let language = React.useContext(LanguageContext);
     
     let monthNames = language.pageContent[language.pageLanguage].MonthList;
-    
     let day = date.getDate();
-  
     let monthIndex = date.getMonth();
     let monthName = monthNames[monthIndex];
-    
     let year = date.getFullYear(); 
   
     let newDate = `${day}-${monthName}-${year}`;  
