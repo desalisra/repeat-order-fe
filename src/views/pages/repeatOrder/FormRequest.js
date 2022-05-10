@@ -16,7 +16,7 @@ import LanguageContext from "containers/languageContext";
 import { ContextLoad } from "containers/TheLayout";
 import { Context } from "./RepeatOrder";
 import { get_products } from "./RepeatOrderLink";
-import { glbNumberFormat } from "reusable/Helper";
+import { GlbNumberFormat } from "reusable/Helper";
 
 const fields = [
   { key: "ProdCode", label: "Procode" },
@@ -327,7 +327,7 @@ const FormRequest = () => {
                       type="text"
                       id="quantity"
                       size="sm"
-                      value={glbNumberFormat(QtyText)}
+                      value={GlbNumberFormat(QtyText)}
                       disabled
                     />
                   </CCol>
@@ -341,7 +341,7 @@ const FormRequest = () => {
                       type="text"
                       id="hold-order"
                       size="sm"
-                      value={glbNumberFormat(orderHoldText)}
+                      value={GlbNumberFormat(orderHoldText)}
                       disabled
                     />
                   </CCol>
@@ -357,7 +357,7 @@ const FormRequest = () => {
                       type="text"
                       id="order-limit"
                       size="sm"
-                      value={glbNumberFormat(orderLimitText)}
+                      value={GlbNumberFormat(orderLimitText)}
                       disabled
                     />
                   </CCol>
@@ -371,7 +371,7 @@ const FormRequest = () => {
                       type="text"
                       id="remain"
                       size="sm"
-                      value={glbNumberFormat(remainText)}
+                      value={GlbNumberFormat(remainText)}
                       disabled
                     />
                   </CCol>
@@ -405,7 +405,7 @@ const FormRequest = () => {
                       // decimalScale={2}
                       id="net-price"
                       size="sm"
-                      value={glbNumberFormat(netPriceText)}
+                      value={GlbNumberFormat(netPriceText)}
                       disabled
                     />
                   </CCol>
@@ -435,7 +435,7 @@ const FormRequest = () => {
                       type="text"
                       id="net-price-total"
                       size="sm"
-                      value={glbNumberFormat(netPriceTotalText)}
+                      value={GlbNumberFormat(netPriceTotalText)}
                       disabled
                     />
                   </CCol>

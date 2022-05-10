@@ -17,7 +17,7 @@ import {
 
 import DataTable from "reusable/DataTable";
 import LanguageContext from "containers/languageContext";
-import { glbNumberFormat } from "reusable/Helper";
+import { GlbNumberFormat } from "reusable/Helper";
 
 import { Context } from "./RepeatOrder";
 
@@ -80,22 +80,22 @@ const DataRequest = () => {
                   fields={fields}
                   scopedSlots={{
                     'ReqQty': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqQty)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqQty)}</td>
                     ),
                     'ReqOrderUnit': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqOrderUnit)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqOrderUnit)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqOrderLimit)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
                     'ReqRemain': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqRemain)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqRemain)}</td>
                     ),
                     'ReqNettPrice': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqNettPrice)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqNettPrice)}</td>
                     ),
                     'ReqNettPriceTotal': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
                     ),
                   }}
                   getRowData={(e) => getRowData(e)}
@@ -114,7 +114,7 @@ const DataRequest = () => {
                           type="text"
                           id="grand-total"
                           size="sm"
-                          value={glbNumberFormat(ctx.state.grandTotal)}
+                          value={GlbNumberFormat(ctx.state.grandTotal)}
                           disabled
                         />
                       </CCol>
@@ -132,22 +132,22 @@ const DataRequest = () => {
                   fields={fields}
                   scopedSlots={{
                     'ReqQty': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqQty)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqQty)}</td>
                     ),
                     'ReqOrderUnit': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqOrderUnit)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqOrderUnit)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqOrderLimit)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
                     'ReqRemain': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqRemain)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqRemain)}</td>
                     ),
                     'ReqNettPrice': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqNettPrice)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqNettPrice)}</td>
                     ),
                     'ReqNettPriceTotal': (item)=>(
-                      <td align="right">{glbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
                     ),
                   }}
                   getRowData={(e) => getRowData(e)}

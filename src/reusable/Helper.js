@@ -1,6 +1,9 @@
+import React from "react";
+import LanguageContext from "containers/languageContext";
+
 // tampilan angka supaya tampil dengan separator ribuan
 // untuk tampilan yang di ketik belum berhasil
-export const glbNumberFormat = (amount) => {
+export const GlbNumberFormat = (amount) => {
     if (amount === '' || amount === undefined || amount === 0  || amount === '0' || amount === null) {
       return amount;
     } 
@@ -10,12 +13,11 @@ export const glbNumberFormat = (amount) => {
 };
 
 // merubah format tanggal inputan menjadi dd MMM yyyy
-export const glbFormatDate = (e) => {
-    const date = new Date(e);
-
-    let monthNames =["Jan","Feb","Mar","Apr",
-                     "May","Jun","Jul","Aug",
-                     "Sep", "Oct","Nov","Dec"];
+export const GlbFormatDate = (e) => {
+    const date = new Date(e);    
+    let language = React.useContext(LanguageContext);
+    
+    let monthNames = language.pageContent[language.pageLanguage].MonthList;
     
     let day = date.getDate();
   
@@ -27,4 +29,3 @@ export const glbFormatDate = (e) => {
     let newDate = `${day}-${monthName}-${year}`;  
     return newDate;
   };
-// export default glbFormatDate;

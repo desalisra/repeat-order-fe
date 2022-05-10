@@ -1,6 +1,6 @@
 import React from "react";
 import { Context } from "./RepeatOrder";
-import { glbFormatDate } from "reusable/Helper";
+import { GlbFormatDate } from "reusable/Helper";
 
 const ComponentToPrint = React.forwardRef((props, ref) => {
   // var indents = [];
@@ -11,7 +11,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
   let ctx = React.useContext(Context); 
 
   const profile = JSON.parse(localStorage.getItem("profile"));
-  let date = glbFormatDate(new Date());
+  let date = GlbFormatDate(new Date());
 
   return (
     <div ref={ref} className="mx-2 my-2">

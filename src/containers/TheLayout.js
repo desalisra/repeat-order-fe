@@ -72,7 +72,7 @@ const TheLayout = () => {
                   active={loading}
                   spinner
                   text= "loading in progress"
-                  // {language.pageContent[language.pageLanguage].RO.loadingMessage}
+                  //text= {language.pageContent[language.pageLanguage].loadingMessage}
                 >
                   <TheContent />
                 </LoadingOverlay>

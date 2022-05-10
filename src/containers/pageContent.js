@@ -1,5 +1,8 @@
 const pageContent = {
     ID: {
+      MonthList: ["Jan","Feb","Mar","Apr",
+                  "Mei","Jun","Jul","Agu",
+                  "Sep", "Okt","Nov","Des"],
       loadingMessage: "Mohon Tunggu Permintaan Anda Sedang Diproses",
       add: "Tambah",
       edit: "Ubah",
@@ -46,6 +49,9 @@ const pageContent = {
       }
     },
     EN: {
+      MonthList: ["Jan","Feb","Mar","Apr",
+                  "May","Jun","Jul","Aug",
+                  "Sep", "Oct","Nov","Dec"],
       loadingMessage: "Please Wait Your Request is Being Processed",
       add: "Add",
       edit: "Update",
