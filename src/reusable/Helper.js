@@ -21,7 +21,7 @@ export const GlbFormatDate = (e) => {
     let day = date.getDate();
     let monthIndex = date.getMonth();
     let monthName = monthNames[monthIndex];
-    let year = date.getFullYear(); 
+    let year = date.getFullYear();
   
     let newDate = `${day}-${monthName}-${year}`;  
     return newDate;

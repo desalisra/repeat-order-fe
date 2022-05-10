@@ -26,7 +26,7 @@ const pageContent = {
             fieldpricetot: "Total Harga",
           },
           lblgtotal: "Grand Total",
-          outlet: "Toko",
+          outlet: "Outlet",
           noorder: "No Pesanan",
           status: "Status Pesanan",
           tglconfirm: "Tgl Konfirmasi",
