@@ -34,7 +34,7 @@ const FormRequest = () => {
 
   const [procodeText, setProcodeText] = useState("");
   const [pronameText, setPronameText] = useState("");
-  const [QtyText, setQtyText] = useState("");
+  const [StockText, setStockText] = useState("");
   const [orderQtyText, setOrderQtyText] = useState("");
   const [remainText, setRemainText] = useState("");
   const [orderHoldText, setOrderHoldText] = useState("");
@@ -209,13 +209,15 @@ const FormRequest = () => {
       setPronameText(ctx.state.rowData.ReqName);
       setOrderQtyText(ctx.state.rowData.ReqQty);
       setOrderUnitText(ctx.state.rowData.ReqSellPackName);
-      setQtyText(ctx.state.rowData.ReqQty);
+      setStockText(ctx.state.rowData.ReqStock);
       setOrderHoldText(ctx.state.rowData.ReqHold);
       setOrderLimitText(ctx.state.rowData.ReqOrderLimit);
       setLocalPRoductText(ctx.state.rowData.ReqLocalProcod);
-      setRemainText(ctx.state.rowData.ReqRemain);
+      //setRemainText(ctx.state.rowData.ReqRemain);
+      setRemainText(orderLimitText - orderQtyText);
       setNetPriceText(ctx.state.rowData.ReqNettPrice);
-      setNetPriceTotalText(ctx.state.rowData.ReqNettPriceTotal);
+      //setNetPriceTotalText(ctx.state.rowData.ReqNettPriceTotal);
+      setNetPriceTotalText(netPriceText * orderQtyText);
       setUserUpdateText(ctx.state.rowData.ReqUserID);
       setNoteORText(ctx.state.rowData.ReqKetOr);
       // setUserUpdateText(ctx.state.rowData['ReqKetOr']);
@@ -228,7 +230,7 @@ const FormRequest = () => {
       setPronameText("");
       setOrderQtyText("");
       setOrderUnitText("");
-      setQtyText("");
+      setStockText("");
       setOrderHoldText("");
       setOrderLimitText("");
       setRemainText("");
@@ -318,16 +320,16 @@ const FormRequest = () => {
                 </CRow>
                 <CRow className="mb-1">
                   <CCol className="pr-0" md={2}>
-                    <CLabel htmlFor="quantity">
-                      {language.pageContent[language.pageLanguage].RO.qty}
+                    <CLabel htmlFor="stock">
+                      {language.pageContent[language.pageLanguage].RO.stock}
                     </CLabel>
                   </CCol>
                   <CCol className="pr-1" md={2}>
                     <CInput
                       type="text"
-                      id="quantity"
+                      id="stock"
                       size="sm"
-                      value={GlbNumberFormat(QtyText)}
+                      value={GlbNumberFormat(StockText)}
                       disabled
                     />
                   </CCol>

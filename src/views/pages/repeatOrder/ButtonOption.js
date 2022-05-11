@@ -17,6 +17,12 @@ const ButtonOption = () => {
 
     const componentRef = useRef();
 
+    const handleNewRequest = async () => {    
+       // kalau ada yang belum confirm, ada pertanyaan untuk refresh atau batal
+       //       refresh: yang belum di confirm di reset ulang seperti baru, tetapi nomor sama
+       // kalau sudah confirm semua, bikin request baru
+    };
+
     const handleConfirm = async (e) => {    
         if (ctx.state.rowsData.length === 0 ) {
             alert('data not found')
@@ -53,13 +59,14 @@ const ButtonOption = () => {
                 <CCol sm={5} className="d-flex justify-content-end">
                     <CButton color="dark" 
                              className="mr-2"
+                             onclick={handleNewRequest()}
                              disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].RO.request}
                     </CButton>
                     <CButton color="dark" 
                              className="mr-2"
                              //onClick={ () => ctx.state.rowsData.length === 0 ? alert('data not found') : alert('data has been confirmed')}
-                             onClick={ () => handleConfirm(ctx.state.orderNum) }
+                             onClick={() => handleConfirm(ctx.state.orderNum)}
                              disabled={ctx.state.btnEnabled}>
                         {language.pageContent[language.pageLanguage].RO.konfirmasi}
                     </CButton>

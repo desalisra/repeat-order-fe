@@ -227,7 +227,7 @@ const HeaderRo = () => {
                       id="order-status"
                       size="sm"
                       placeholder="un / confirmed"
-                      value={ctx.state.orderStatus === "Y" ? "Confirm" : "UnConfirm"}
+                      value={ctx.state.orderStatus === "Y" ? "Confirm" : ctx.state.orderStatus === "N" ? "UnConfirm" : ""}
                       disabled
                     />
                   </CCol>

@@ -34,10 +34,10 @@ const DataRequest = () => {
   const fields = [
     { key: "ReqProdCode", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprocod },
     { key: "ReqName", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldname },
-    { key: "ReqQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqty },
+    { key: "ReqStock", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldstock },
     { key: "ReqSellPackName", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldunitOR, _style: { width: '100px' } },
-    { key: "ReqOrderUnit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqtyOR },
     { key: "ReqOrderLimit", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldlimitOR },
+    { key: "ReqQty", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldqtyOR },
     { key: "ReqRemain", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldsisa },
     { key: "ReqNettPrice", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldprice },
     { key: "ReqNettPriceTotal", label: language.pageContent[language.pageLanguage].RO.tabelRO.fieldpricetot },
@@ -79,23 +79,25 @@ const DataRequest = () => {
                   items={ctx.state.rowsData}
                   fields={fields}
                   scopedSlots={{
+                    'ReqStock': (item)=>(
+                      <td align="right">{GlbNumberFormat(item.ReqStock)}</td>
+                    ),
                     'ReqQty': (item)=>(
                       <td align="right">{GlbNumberFormat(item.ReqQty)}</td>
-                    ),
-                    'ReqOrderUnit': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqOrderUnit)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
                       <td align="right">{GlbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
                     'ReqRemain': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqRemain)}</td>
+                      //<td align="right">{GlbNumberFormat(item.ReqRemain)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqOrderLimit - item.ReqQty)}</td>
                     ),
                     'ReqNettPrice': (item)=>(
                       <td align="right">{GlbNumberFormat(item.ReqNettPrice)}</td>
                     ),
                     'ReqNettPriceTotal': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      //<td align="right">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      <td align="right">{GlbNumberFormat(item.ReqNettPrice * item.ReqQty)}</td>
                     ),
                   }}
                   getRowData={(e) => getRowData(e)}
@@ -131,11 +133,11 @@ const DataRequest = () => {
                   items={ctx.state.rowsDataLocal}
                   fields={fields}
                   scopedSlots={{
+                    'ReqStock': (item)=>(
+                      <td align="right">{GlbNumberFormat(item.ReqStock)}</td>
+                    ),
                     'ReqQty': (item)=>(
                       <td align="right">{GlbNumberFormat(item.ReqQty)}</td>
-                    ),
-                    'ReqOrderUnit': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqOrderUnit)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
                       <td align="right">{GlbNumberFormat(item.ReqOrderLimit)}</td>
