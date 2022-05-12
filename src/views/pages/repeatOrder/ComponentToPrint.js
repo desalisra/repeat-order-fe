@@ -1,4 +1,5 @@
 import React from "react";
+import LanguageContext from "containers/languageContext";
 import { Context } from "./RepeatOrder";
 import { GlbFormatDate } from "reusable/Helper";
 
@@ -8,6 +9,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
   //   indents.push(<tr key={i}><td>0905363</td><td>Kiranti Minuman Jamu</td><td align="right">/ 3 Bottle</td></tr>);
   // }
   
+  let language = React.useContext(LanguageContext);
   let ctx = React.useContext(Context); 
 
   const profile = JSON.parse(localStorage.getItem("profile"));
@@ -15,23 +17,23 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
 
   return (
     <div ref={ref} className="mx-2 my-2">
-      <h3><b>SURAT PESANAN OUTLET</b></h3>
-      <h5 className="mb-4">Tanggal : {date}</h5>
+      <h3><b>{language.pageContent[language.pageLanguage].RO.printRO.SPO}</b></h3>
+      <h5 className="mb-4">{language.pageContent[language.pageLanguage].RO.printRO.date} : {date}</h5>
 
       <table className="mb-4" width="400">
         <tbody>
           <tr>
-            <td align="left" valign="top" width="100px">NO SPO</td>
+            <td align="left" valign="top" width="100px">{language.pageContent[language.pageLanguage].RO.printRO.noSPO}</td>
             <td align="left" valign="top" width="5px">:</td>
-            <td align="left" valign="top" >856000006</td>
+            <td align="left" valign="top" >{ctx.state.orderNum}</td>
           </tr>
           <tr>
-            <td align="left" valign="top" >OUTLET CODE</td>
+            <td align="left" valign="top" >{language.pageContent[language.pageLanguage].RO.printRO.outletcode}</td>
             <td align="left" valign="top" >:</td>
             <td align="left" valign="top" >CODE CENTURYOUTLET_1H</td>
           </tr>
           <tr>
-            <td align="left" valign="top" >NAMA APOTEK</td>
+            <td align="left" valign="top" >{language.pageContent[language.pageLanguage].RO.printRO.pharmacyname}</td>
             <td align="left" valign="top" >:</td>
             <td align="left" valign="top" >NAME CENTURYOUTLET_1H</td>
           </tr>
@@ -41,7 +43,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
             <td align="left" valign="top" >449/0004-SIA/DPMPTSP/OL/2018</td>
           </tr>
           <tr>
-            <td align="left" valign="top" >ALAMAT</td>
+            <td align="left" valign="top" >{language.pageContent[language.pageLanguage].RO.printRO.address}</td>
             <td align="left" valign="top" >:</td>
             <td align="left" valign="top" >LANTAI LOWER GROUND UNIT NO.117 AKJDHFA AKHFAKHAFD KAHDFH A AKHDFA FAK KAHSFHA KHAKH</td>
           </tr>
@@ -61,7 +63,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
       <table className="mb-4" width="400">
         <tbody>
           <tr>
-            <td align="left" valign="top" colspan="3">KEPADA  :</td>
+            <td align="left" valign="top" colspan="3">{language.pageContent[language.pageLanguage].RO.printRO.to}  :</td>
             <td align="left" valign="top" ></td>
             <td align="left" valign="top" ></td>
           </tr>
@@ -126,9 +128,9 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
           <td colSpan={3}>=========================================</td>
         </tr>
         <tr>
-          <th align="left" valign="top" width="65px">Procode</th>
-          <th align="left" valign="top" width="250px">Product Name</th>
-          <th align="left" valign="top">Qty</th>
+          <th align="left" valign="top" width="65px">{language.pageContent[language.pageLanguage].RO.printRO.fieldprocod}</th>
+          <th align="left" valign="top" width="250px">{language.pageContent[language.pageLanguage].RO.printRO.fieldname}</th>
+          <th align="left" valign="top">{language.pageContent[language.pageLanguage].RO.printRO.fieldqtyOR}</th>
         </tr>
         <tr>
           <td colSpan={3}>=========================================</td>
@@ -147,7 +149,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
         </tr>
       </table>
 
-      <p>Pemesan,</p>
+      <p>{language.pageContent[language.pageLanguage].RO.printRO.orderBy},</p>
       <br></br>
       <br></br>
       {profile.mem_username}

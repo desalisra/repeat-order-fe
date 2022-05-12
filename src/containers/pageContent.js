@@ -21,6 +21,19 @@ const pageContent = {
       cancel: "Batal",
       print: "Cetak",
       RO:{
+          printRO:{
+            SPO:"SURAT PESANAN OUTLET",
+            noSPO:"No. SPO",
+            pharmacyname: "Nama Apotek",
+            outletcode: "Kode Outlet",   
+            address: "Alamat",
+            to: "Kepada",
+            date:"Tanggal",
+            orderBy: "Pemesan",    
+            fieldprocod: "Produk",
+            fieldname: "Nama Produk", 
+            fieldqtyOR: "Qty Pesanan",
+          },
           taball: "SEMUA",
           tablocal: "LOKAL",
           tabelRO: {
@@ -94,6 +107,19 @@ const pageContent = {
       cancel: "Cancel",
       print: "Print",
       RO:{
+          printRO:{
+            SPO:"OUTLET REPEAT ORDER",
+            noSPO:"ORP No.",
+            pharmacyname: "Pharmacy Name",
+            outletcode: "Outlet Code",
+            address: "Address",
+            to: "To",
+            date:"Date",
+            orderBy: "Order by",
+            fieldprocod: "Procode",
+            fieldname: "Product Name", 
+            fieldqtyOR: "Order Qty",
+          },
           taball: "ALL",
           tablocal: "LOCAL",
           tabelRO: {
