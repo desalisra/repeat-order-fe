@@ -104,7 +104,7 @@ const DataRequest = () => {
                 />              
 
                 <CRow className="d-flex justify-content-end">
-                  <CCol md={6}>
+                  <CCol md={7}>
                     <CRow className="d-flex justify-content-end">
                       <CCol className="pr-0 pt-1 text-right" md={3}>
                         <CLabel htmlFor="grand-total">
@@ -157,7 +157,7 @@ const DataRequest = () => {
                   getRowData={(e) => getRowData(e)}
                 />
                 <CRow className="d-flex justify-content-end">
-                  <CCol md={6}>
+                  <CCol md={7}>
                     <CRow className="d-flex justify-content-end">
                       <CCol className="pr-0 pt-1 text-right" md={3}>
                         <CLabel htmlFor="grand-total">
