@@ -25,24 +25,24 @@ const ButtonOption = () => {
 
     const handleConfirm = async (e) => {    
         if (ctx.state.rowsData.length === 0 ) {
-            alert('data not found')
+            alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].datanotfound)
         } else {
             if (ctx.state.orderStatus === 'Y') {
-                alert("Order No : " + ctx.state.orderNum + ", has been confirmed")
+                alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].dataconfirm)
             } else {
                 // sintak for confirm here
                 // await ctx.dispatch.setOrderStatus('Y');
-                alert('confirm success')
+                alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].confirmsuccess)
             }
         }
     };
 
     const handlePrintOnClick = async (e) => {  
         if (ctx.state.rowsData.length === 0) {
-            alert('data not found')
+            alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].datanotfound)
         } else {
             if (ctx.state.orderStatus !== "Y") {
-                alert("Order No : " + ctx.state.orderNum + ", UnConfirm")
+                alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].datanotconfirm)
             } else {
                 // code for additional condition here
                 handlePrint()

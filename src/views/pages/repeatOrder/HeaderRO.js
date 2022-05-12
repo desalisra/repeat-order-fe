@@ -88,7 +88,8 @@ const HeaderRo = () => {
       .then((res) => {
         res = res.data;
         if(res.error.status){
-          alert(res.error.msg)
+          //alert(res.error.msg)
+          alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + orderNum + "' " + language.pageContent[language.pageLanguage].datanotfound)
         }
         else{
           ctx.dispacth.setOrderNum(res.data.Number);

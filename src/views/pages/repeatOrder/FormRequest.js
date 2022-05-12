@@ -126,7 +126,7 @@ const FormRequest = () => {
   const btnAddClick = async () => {
     if (ctx.state.orderStatus !== "Y") {
       if (ctx.state.rowsData.length === 0) { 
-        alert('select order number to be edited first !') 
+        alert(language.pageContent[language.pageLanguage].emptyOR) 
       } else {
         await ctx.dispacth.setRowData({});
         ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
@@ -136,17 +136,17 @@ const FormRequest = () => {
       }
     }
     else {
-      alert("Order No " + ctx.state.orderNum + ", has been confirmed !")
+      alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].dataconfirm)
     }
   };
 
   const btnEditClick = () => {
     if (ctx.state.orderStatus !== "Y") {
       if (ctx.state.rowsData.length === 0) { 
-        alert('select order number to be edited first !') 
+        alert(language.pageContent[language.pageLanguage].emptyOR)
       } else {
         if (ctx.state.rowData.ReqProdCode === undefined || ctx.state.rowData.ReqProdCode === '') { 
-          alert('select product to be edited first !') 
+          alert(language.pageContent[language.pageLanguage].emptyprocod) 
         } else {
           ctx.dispacth.setbtnEnabled(!ctx.state.btnEnabled);
           setOrderQtyDisabled(false);
@@ -154,22 +154,22 @@ const FormRequest = () => {
       }
     }
     else {
-      alert("Order No : " + ctx.state.orderNum + ", has been confirmed ! ")
+      alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].dataconfirm)
     }
   };
 
   const btnDeleteClick = () => {
     if (ctx.state.orderStatus !== "Y") {
       if (ctx.state.rowData.ReqProdCode === undefined || ctx.state.rowData.ReqProdCode === '')     { 
-        alert('select the data to be deleted first !') 
+        alert(language.pageContent[language.pageLanguage].emptyprocod) 
       }
       else {
-        // alert(`Product has been deleted ! ${procodeText}`) 
-        alert("Product : " + procodeText + "-" + pronameText + ", has been deleted ! ") 
+        // alert(`Product has been deleted ! ${procodeText}`)
+        alert(language.pageContent[language.pageLanguage].RO.product + " '" + procodeText + "'-'" + pronameText + "' \n" + language.pageContent[language.pageLanguage].deletesuccess) 
       }
     }
     else {
-      alert("Order No : " + ctx.state.orderNum + ", has been confirmed ! ")
+      alert(language.pageContent[language.pageLanguage].RO.noorder + " '" + ctx.state.orderNum + "' \n" + language.pageContent[language.pageLanguage].dataconfirm)
     }
   };
 
