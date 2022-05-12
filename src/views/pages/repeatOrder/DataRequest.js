@@ -80,24 +80,24 @@ const DataRequest = () => {
                   fields={fields}
                   scopedSlots={{
                     'ReqStock': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqStock)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqStock)}</td>
                     ),
                     'ReqQty': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqQty)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqQty)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqOrderLimit)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
                     'ReqRemain': (item)=>(
-                      //<td align="right">{GlbNumberFormat(item.ReqRemain)}</td>
-                      <td align="right">{GlbNumberFormat(item.ReqOrderLimit - item.ReqQty)}</td>
+                      //<td align="left">{GlbNumberFormat(item.ReqRemain)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqOrderLimit - item.ReqQty)}</td>
                     ),
                     'ReqNettPrice': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqNettPrice)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqNettPrice)}</td>
                     ),
                     'ReqNettPriceTotal': (item)=>(
-                      //<td align="right">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
-                      <td align="right">{GlbNumberFormat(item.ReqNettPrice * item.ReqQty)}</td>
+                      //<td align="left">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqNettPrice * item.ReqQty)}</td>
                     ),
                   }}
                   getRowData={(e) => getRowData(e)}
@@ -134,22 +134,24 @@ const DataRequest = () => {
                   fields={fields}
                   scopedSlots={{
                     'ReqStock': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqStock)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqStock)}</td>
                     ),
                     'ReqQty': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqQty)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqQty)}</td>
                     ),
                     'ReqOrderLimit': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqOrderLimit)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqOrderLimit)}</td>
                     ),
                     'ReqRemain': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqRemain)}</td>
+                      //<td align="left">{GlbNumberFormat(item.ReqRemain)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqOrderLimit - item.ReqQty)}</td>
                     ),
                     'ReqNettPrice': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqNettPrice)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqNettPrice)}</td>
                     ),
                     'ReqNettPriceTotal': (item)=>(
-                      <td align="right">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      //<td align="left">{GlbNumberFormat(item.ReqNettPriceTotal)}</td>
+                      <td align="left">{GlbNumberFormat(item.ReqNettPrice * item.ReqQty)}</td>
                     ),
                   }}
                   getRowData={(e) => getRowData(e)}

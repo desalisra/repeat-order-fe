@@ -16,7 +16,7 @@ import LanguageContext from "containers/languageContext";
 import { ContextLoad } from "containers/TheLayout";
 import { Context } from "./RepeatOrder";
 import { get_products } from "./RepeatOrderLink";
-import { GlbNumberFormat } from "reusable/Helper";
+import { GlbNumberFormat, GlbFormatDate } from "reusable/Helper";
 
 const fields = [
   { key: "ProdCode", label: "Procode" },
@@ -42,10 +42,22 @@ const FormRequest = () => {
   const [netPriceText, setNetPriceText] = useState("");
   const [netPriceTotalText, setNetPriceTotalText] = useState("");
   const [orderLimitText, setOrderLimitText] = useState("");
+  const [OrderMinText, setOrderMinText] = useState("");
+  const [OrderMaxText, setOrderMaxText] = useState("");
   const [localPRoductText, setLocalPRoductText] = useState("");
   const [userUpdateText, setUserUpdateText] = useState("");
+  const [dateUpdateText, setDateUpdateText] = useState("");
   const [noteORText, setNoteORText] = useState("");
-
+  const [purchNumText, setPurchNumText] = useState("");
+  const [purchDateText, setPurchDateText] = useState("");
+  const [alocNumText, setAlocNumText] = useState("");
+  const [alocDateText, setAlocDateText] = useState("");
+  const [trfNumText, setTrfNumText] = useState("");
+  const [trfDateText, setTrfDateText] = useState("");
+  const [outletRcvNumText, setOutletRcvNumText] = useState("");
+  const [outletRcvDateText, setOutletRcvDateText] = useState("");
+  const [cancelCodeText, setCancelCodeText] = useState("");
+  const [cancelDateText, setCancelDateText] = useState("");
   const [modal, setModal] = useState(false);
   const [listProduct, setListProduct] = useState([]);
   const [IsBlur, setIsBlur] = useState(false);
@@ -212,6 +224,8 @@ const FormRequest = () => {
       setStockText(ctx.state.rowData.ReqStock);
       setOrderHoldText(ctx.state.rowData.ReqHold);
       setOrderLimitText(ctx.state.rowData.ReqOrderLimit);
+      setOrderMinText(ctx.state.rowData.ReqMinOrder);
+      setOrderMaxText(ctx.state.rowData.ReqMaxOrder);
       setLocalPRoductText(ctx.state.rowData.ReqLocalProcod);
       //setRemainText(ctx.state.rowData.ReqRemain);
       setRemainText(orderLimitText - orderQtyText);
@@ -219,8 +233,19 @@ const FormRequest = () => {
       //setNetPriceTotalText(ctx.state.rowData.ReqNettPriceTotal);
       setNetPriceTotalText(netPriceText * orderQtyText);
       setUserUpdateText(ctx.state.rowData.ReqUserID);
+      setDateUpdateText(ctx.state.rowData.ReqLastUpdate);      
       setNoteORText(ctx.state.rowData.ReqKetOr);
       // setUserUpdateText(ctx.state.rowData['ReqKetOr']);
+      setPurchNumText(ctx.state.rowData.ReqPurchNum === null ? "" : ctx.state.rowData.ReqPurchNum);
+      setPurchDateText(ctx.state.rowData.ReqPurchDate === null ? "" : ctx.state.rowData.ReqPurchDate);
+      setAlocNumText(ctx.state.rowData.ReqAlocNum === null ? "" : ctx.state.rowData.ReqAlocNum);
+      setAlocDateText(ctx.state.rowData.ReqAlocDate === null ? "" : ctx.state.rowData.ReqAlocDate);
+      setTrfNumText(ctx.state.rowData.ReqTrfNum === null ? "" : ctx.state.rowData.ReqTrfNum);
+      setTrfDateText(ctx.state.rowData.ReqTrfDate === null ? "" : ctx.state.rowData.ReqTrfDate);
+      setOutletRcvNumText(ctx.state.rowData.ReqOutletRcvNum === null ? "" : ctx.state.rowData.ReqOutletRcvNum);
+      setOutletRcvDateText(ctx.state.rowData.ReqOutletRcvDate === null ? "" : ctx.state.rowData.ReqOutletRcvDate);
+      setCancelCodeText(ctx.state.rowData.ReqCancelCode === null ? "" : ctx.state.rowData.ReqCancelCode);
+      setCancelDateText(ctx.state.rowData.ReqCancelDate === null ? "" : ctx.state.rowData.ReqCancelDate);      
     }
   };
 
@@ -233,12 +258,25 @@ const FormRequest = () => {
       setStockText("");
       setOrderHoldText("");
       setOrderLimitText("");
-      setRemainText("");
+      setRemainText("");      
+      setOrderMinText("");
+      setOrderMaxText("");
       setLocalPRoductText("");
       setNetPriceText("");
       setNetPriceTotalText("");
       setUserUpdateText("");
+      setDateUpdateText("");
       setNoteORText("");
+      setPurchNumText("");
+      setPurchDateText("");
+      setAlocNumText("");
+      setAlocDateText("");
+      setTrfNumText("");
+      setTrfDateText("");
+      setOutletRcvNumText("");
+      setOutletRcvDateText("");
+      setCancelCodeText("");
+      setCancelDateText("");
     }
   };
 
@@ -267,7 +305,7 @@ const FormRequest = () => {
                       disabled={procodeDisabled}
                     />
                   </CCol>
-                  <CCol className="px-0" md={7}>
+                  <CCol className="px-0" md={7}> 
                     <CInput
                       type="text"
                       value={pronameText}
@@ -275,7 +313,7 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                  <CCol className="pl-1"md={1}>
+                  <CCol className="pl-1" md={1}>
                     <CButton
                       color="light"
                       size="sm"
@@ -293,7 +331,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.qtyOR}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="number"
                       id="order-qty"
@@ -303,17 +341,33 @@ const FormRequest = () => {
                       disabled={orderQtyDisabled}
                     />
                   </CCol>
+                </CRow>
+                <CRow className="mb-1">
                   <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="order-unit">
                       {language.pageContent[language.pageLanguage].RO.unitOR}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="text"
                       id="order-unit"
                       size="sm"
                       value={orderUnitText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="sell-unit">
+                      {language.pageContent[language.pageLanguage].RO.unitSell}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="sell-unit"
+                      size="sm"
+                      //value={orderUnitText}
                       disabled
                     />
                   </CCol>
@@ -324,7 +378,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.stock}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="text"
                       id="stock"
@@ -338,7 +392,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.holdOR}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="text"
                       id="hold-order"
@@ -350,11 +404,41 @@ const FormRequest = () => {
                 </CRow>
                 <CRow className="mb-1">
                   <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="min-order">
+                      {language.pageContent[language.pageLanguage].RO.minOR}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="min-order"
+                      size="sm"
+                      value={GlbNumberFormat(OrderMinText)}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="max-order">
+                      {language.pageContent[language.pageLanguage].RO.maxOR}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="max-order"
+                      size="sm"
+                      value={GlbNumberFormat(OrderMaxText)}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="order-limit">
                       {language.pageContent[language.pageLanguage].RO.limitOR}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="text"
                       id="order-limit"
@@ -368,7 +452,7 @@ const FormRequest = () => {
                       {language.pageContent[language.pageLanguage].RO.sisa}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="text"
                       id="remain"
@@ -380,25 +464,11 @@ const FormRequest = () => {
                 </CRow>
                 <CRow className="mb-1">
                   <CCol className="pr-0" md={2}>
-                    <CLabel htmlFor="local-product">
-                      {language.pageContent[language.pageLanguage].RO.lclprod}
-                    </CLabel>
-                  </CCol>
-                  <CCol className="pr-1" md={2}>
-                    <CInput
-                      type="text"
-                      id="local-product"
-                      size="sm"
-                      value={localPRoductText}
-                      disabled
-                    />
-                  </CCol>
-                  <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="net-price">
                       {language.pageContent[language.pageLanguage].RO.price}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="text"
                       // data-inputmask="'alias': 'currency'"
@@ -411,33 +481,33 @@ const FormRequest = () => {
                       disabled
                     />
                   </CCol>
-                </CRow>
-                <CRow className="mb-1">
-                  <CCol className="pr-0" md={2}>
-                    <CLabel htmlFor="user-update">
-                      {language.pageContent[language.pageLanguage].RO.usrupdate}
-                    </CLabel>
-                  </CCol>
-                  <CCol className="pr-1" md={2}>
-                    <CInput
-                      type="text"
-                      id="user-update"
-                      size="sm"
-                      value={userUpdateText}
-                      disabled
-                    />
-                  </CCol>
                   <CCol className="pr-0" md={2}>
                     <CLabel htmlFor="net-price-total">
                       {language.pageContent[language.pageLanguage].RO.pricetot}
                     </CLabel>
                   </CCol>
-                  <CCol className="pr-1" md={2}>
+                  <CCol className="pr-1" md={3}>
                     <CInput
                       type="text"
                       id="net-price-total"
                       size="sm"
                       value={GlbNumberFormat(netPriceTotalText)}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="local-product">
+                      {language.pageContent[language.pageLanguage].RO.lclprod}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="local-product"
+                      size="sm"
+                      value={localPRoductText}
                       disabled
                     />
                   </CCol>
@@ -454,6 +524,186 @@ const FormRequest = () => {
                       id="nota-or"
                       size="sm"
                       value={noteORText}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="purch-number">
+                      {language.pageContent[language.pageLanguage].RO.purchnumber}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="purch-number"
+                      size="sm"
+                      value={purchNumText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="purch-date">
+                      {language.pageContent[language.pageLanguage].RO.purchdate}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="purch-date"
+                      size="sm"
+                      value={purchDateText === "" ? "" : GlbFormatDate(purchDateText)}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="aloc-number">
+                      {language.pageContent[language.pageLanguage].RO.alocnumber}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="aloc-number"
+                      size="sm"
+                      value={alocNumText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="aloc-date">
+                      {language.pageContent[language.pageLanguage].RO.alocdate}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="aloc-date"
+                      size="sm"
+                      value={alocDateText === "" ? "" : GlbFormatDate(alocDateText)}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="trans-number">
+                      {language.pageContent[language.pageLanguage].RO.transnumber}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="trans-number"
+                      size="sm"
+                      value={trfNumText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="trans-date">
+                      {language.pageContent[language.pageLanguage].RO.transdate}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="trans-date"
+                      size="sm"
+                      value={trfDateText === "" ? "" : GlbFormatDate(trfDateText)}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="receive-number">
+                      {language.pageContent[language.pageLanguage].RO.receivenumber}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="receive-number"
+                      size="sm"
+                      value={outletRcvNumText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="receive-date">
+                      {language.pageContent[language.pageLanguage].RO.receivedate}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="receive-date"
+                      size="sm"
+                      value={outletRcvDateText === "" ? "" : GlbFormatDate(outletRcvDateText)}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="cancel-code">
+                      {language.pageContent[language.pageLanguage].RO.cancelcode}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="cancel-code"
+                      size="sm"
+                      value={cancelCodeText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="cancel-date">
+                      {language.pageContent[language.pageLanguage].RO.canceldate}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="cancel-date"
+                      size="sm"
+                      value={cancelDateText === "" ? "" : GlbFormatDate(cancelDateText)}
+                      disabled
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="mb-1">
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="user-update">
+                      {language.pageContent[language.pageLanguage].RO.usrupdate}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="user-update"
+                      size="sm"
+                      value={userUpdateText}
+                      disabled
+                    />
+                  </CCol>
+                  <CCol className="pr-0" md={2}>
+                    <CLabel htmlFor="date-update">
+                      {language.pageContent[language.pageLanguage].RO.dateupdate}
+                    </CLabel>
+                  </CCol>
+                  <CCol className="pr-1" md={3}>
+                    <CInput
+                      type="text"
+                      id="date-update"
+                      size="sm"
+                      value={dateUpdateText === "" ? "" : GlbFormatDate(dateUpdateText)}
                       disabled
                     />
                   </CCol>
