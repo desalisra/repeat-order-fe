@@ -80,12 +80,14 @@ const ComponentToPrint = React.forwardRef((props, ref) => {
             <td align="left" valign="top" colspan="3">Desa Kadu,Kec.Curug,Kab.Tanggerang-Banten</td>
           </tr>
           <tr>
-            <td align="left" valign="top" width="45px" >Telp</td>
+            <td align="left" valign="top" width="80px" >Telp</td>
             <td align="left" valign="top" width="5px" >:</td>
             <td align="left" valign="top" >021-5988171</td>
           </tr>
           <tr>
-            <td align="left" valign="top" colspan="3">Izin PBF No : HK.02.06.PBF/V/494/2015</td>
+            <td align="left" valign="top" >Izin PBF No</td>
+            <td align="left" valign="top" >:</td>
+            <td align="left" valign="top" >HK.02.06.PBF/V/494/2015</td>
           </tr>
           <tr>
             <td align="left" valign="top" >APJ</td>

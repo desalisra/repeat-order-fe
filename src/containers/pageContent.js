@@ -23,7 +23,7 @@ const pageContent = {
       RO:{
           printRO:{
             SPO:"SURAT PESANAN OUTLET",
-            noSPO:"No. SPO",
+            noSPO:"No. Pesanan",
             pharmacyname: "Nama Apotek",
             outletcode: "Kode Outlet",   
             address: "Alamat",
@@ -109,7 +109,7 @@ const pageContent = {
       RO:{
           printRO:{
             SPO:"OUTLET REPEAT ORDER",
-            noSPO:"ORP No.",
+            noSPO:"Order No.",
             pharmacyname: "Pharmacy Name",
             outletcode: "Outlet Code",
             address: "Address",

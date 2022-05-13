@@ -56,7 +56,7 @@ const ButtonOption = () => {
     return(
         <CContainer fluid className="mb-2">
             <CRow className="justify-content-end">
-                <CCol sm={5} className="d-flex justify-content-end">
+                <CCol sm={6} className="d-flex justify-content-end">
                     <CButton color="dark" 
                              className="mr-2"
                              onclick={handleNewRequest()}
